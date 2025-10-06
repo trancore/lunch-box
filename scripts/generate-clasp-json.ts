@@ -5,7 +5,7 @@ console.log('.envファイルから環境変数を読み込み、clasp.jsonに�
 
 const claspConfig = {
   scriptId: process.env.SCRIPT_ID,
-  rootDir: '',
+  rootDir: 'dist',
   scriptExtensions: ['.js', '.gs'],
   htmlExtensions: ['.html'],
   jsonExtensions: ['.json'],
