@@ -37,6 +37,10 @@ SCRIPT_ID=
 
 ## scripts/について
 
-### generate-settings
+### generate-clasp-json.ts
 
 GASのスクリプトIDをGitHubにpushしないようにするため、.envに環境変数として設定し.clasp.jsonを生成しています。
+
+### main.ts
+
+Webアプリの配信のために必要なGAS用main.tsファイル。
