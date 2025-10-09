@@ -9,7 +9,8 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 export default defineConfig({
   plugins: [
     vue(),
-    vueDevTools(),
+    // FIXME: VueDevToolsとStorybookが競合して動かないため、一旦コメントアウト。
+    // vueDevTools(),
     viteSingleFile(),
     tsconfigPaths({ loose: true }),
   ],
