@@ -1,5 +1,7 @@
+import { PrimeVueResolver } from '@primevue/auto-import-resolver';
 import vue from '@vitejs/plugin-vue';
 import { fileURLToPath, URL } from 'node:url';
+import Components from 'unplugin-vue-components/vite';
 import { defineConfig } from 'vite';
 import { viteSingleFile } from 'vite-plugin-singlefile';
 import vueDevTools from 'vite-plugin-vue-devtools';
@@ -13,6 +15,10 @@ export default defineConfig({
     // vueDevTools(),
     viteSingleFile(),
     tsconfigPaths({ loose: true }),
+    Components({
+      resolvers: [PrimeVueResolver()],
+      dts: 'src/@types/components.d.ts',
+    }),
   ],
   resolve: {
     alias: {
