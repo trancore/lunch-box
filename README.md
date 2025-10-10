@@ -4,15 +4,17 @@
 
 ## 技術スタック
 
-| ライブラリ・フレームワーク | 説明                       |
-| -------------------------- | -------------------------- |
-| Vite                       | ビルドツール               |
-| TypeScript                 | 静的型付け言語             |
-| Vue.js                     | JavaScriptフレームワーク   |
-| Vue Router                 | Vue.js用ルーターライブラリ |
-| Pinia                      | Vue.js用状態管理ライブラリ |
-| eslint                     | JavaScript静的解析ツール   |
-| prettier                   | 整形ツール                 |
+| ライブラリ・フレームワーク | 説明                           |
+| -------------------------- | ------------------------------ |
+| Vite                       | ビルドツール                   |
+| TypeScript                 | 静的型付け言語                 |
+| Vue.js                     | JavaScriptフレームワーク       |
+| PrimeVue                   | Vue用UIコンポーネント          |
+| Storybook                  | コンポーネントデザインカタログ |
+| Vue Router                 | Vue.js用ルーターライブラリ     |
+| Pinia                      | Vue.js用状態管理ライブラリ     |
+| eslint                     | JavaScript静的解析ツール       |
+| prettier                   | 整形ツール                     |
 
 ## 画面イメージ
 
