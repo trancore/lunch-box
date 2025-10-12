@@ -1,5 +1,6 @@
 import Aura from '@primeuix/themes/aura';
 import { createPinia } from 'pinia';
+import 'primeicons/primeicons.css';
 import primeVue from 'primevue/config';
 import { createApp } from 'vue';
 
