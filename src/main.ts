@@ -13,6 +13,7 @@ app.use(router);
 app.use(primeVue, {
   theme: {
     preset: Aura,
+    ripple: true,
   },
 });
 

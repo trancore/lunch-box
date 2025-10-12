@@ -3,7 +3,7 @@ import path from 'node:path';
 
 const config: StorybookConfig = {
   stories: ['../src/components/**/*.stories.ts'],
-  addons: [],
+  addons: ['@storybook/addon-docs'],
   framework: {
     name: '@storybook/vue3-vite',
     options: { docgen: 'vue-component-meta' },
