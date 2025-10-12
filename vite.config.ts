@@ -1,5 +1,7 @@
+import { PrimeVueResolver } from '@primevue/auto-import-resolver';
 import vue from '@vitejs/plugin-vue';
 import { fileURLToPath, URL } from 'node:url';
+import Components from 'unplugin-vue-components/vite';
 import { defineConfig } from 'vite';
 import { viteSingleFile } from 'vite-plugin-singlefile';
 import vueDevTools from 'vite-plugin-vue-devtools';
@@ -9,9 +11,14 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 export default defineConfig({
   plugins: [
     vue(),
-    vueDevTools(),
+    // FIXME: VueDevToolsとStorybookが競合して動かないため、一旦コメントアウト。
+    // vueDevTools(),
     viteSingleFile(),
     tsconfigPaths({ loose: true }),
+    Components({
+      resolvers: [PrimeVueResolver()],
+      dts: 'src/@types/components.d.ts',
+    }),
   ],
   resolve: {
     alias: {
