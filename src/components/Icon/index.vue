@@ -10,6 +10,7 @@ type Props = {
 const ICON_NAME = {
   SHOPPING_BAG: 'pi pi-shopping-bag',
   SEARCH: 'pi pi-search',
+  CARET_RIGHT: 'pi pi-caret-right',
 } as const;
 
 const ICON_TYPE = ['primary', 'secondary'] as const;
