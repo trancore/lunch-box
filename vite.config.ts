@@ -1,6 +1,7 @@
 import { PrimeVueResolver } from '@primevue/auto-import-resolver';
 import vue from '@vitejs/plugin-vue';
 import { fileURLToPath, URL } from 'node:url';
+import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { defineConfig } from 'vite';
 import { viteSingleFile } from 'vite-plugin-singlefile';
@@ -22,6 +23,10 @@ export default defineConfig({
       dts: 'src/@types/components.d.ts',
       directoryAsNamespace: true,
       collapseSamePrefixes: true,
+    }),
+    AutoImport({
+      imports: ['vue'],
+      dts: 'src/@types/auto-imports.d.ts',
     }),
   ],
   resolve: {
