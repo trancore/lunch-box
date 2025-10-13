@@ -11,6 +11,7 @@ const ICON_NAME = {
   SHOPPING_BAG: 'pi pi-shopping-bag',
   SEARCH: 'pi pi-search',
 } as const;
+
 const ICON_TYPE = ['primary', 'secondary'] as const;
 
 const props = withDefaults(defineProps<Props>(), {

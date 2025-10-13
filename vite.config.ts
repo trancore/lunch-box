@@ -5,6 +5,7 @@ import Components from 'unplugin-vue-components/vite';
 import { defineConfig } from 'vite';
 import { viteSingleFile } from 'vite-plugin-singlefile';
 import vueDevTools from 'vite-plugin-vue-devtools';
+import svgLoader from 'vite-svg-loader';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 // https://vite.dev/config/
@@ -15,6 +16,7 @@ export default defineConfig({
     // vueDevTools(),
     viteSingleFile(),
     tsconfigPaths({ loose: true }),
+    svgLoader(),
     Components({
       resolvers: [PrimeVueResolver()],
       dts: 'src/@types/components.d.ts',
