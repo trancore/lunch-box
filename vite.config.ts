@@ -20,6 +20,8 @@ export default defineConfig({
     Components({
       resolvers: [PrimeVueResolver()],
       dts: 'src/@types/components.d.ts',
+      directoryAsNamespace: true,
+      collapseSamePrefixes: true,
     }),
   ],
   resolve: {
