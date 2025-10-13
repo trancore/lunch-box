@@ -1,0 +1,68 @@
+// PrimeVueテーマのカラーバリエーション
+.primary {
+  color: var(--p-primary-color);
+}
+
+.secondary {
+  color: var(--p-secondary-color);
+}
+
+.success {
+  color: var(--p-success-color);
+}
+
+.info {
+  color: var(--p-info-color);
+}
+
+.warning {
+  color: var(--p-warning-color);
+}
+
+.danger {
+  color: var(--p-danger-color);
+}
+
+.help {
+  color: var(--p-help-color);
+}
+
+// テキストカラー
+.text-primary {
+  color: var(--p-text-color);
+}
+
+.text-secondary {
+  color: var(--p-text-muted-color);
+}
+
+// 背景色に応じた自動調整
+.surface {
+  color: var(--p-surface-color);
+}
+
+.surface-variant {
+  color: var(--p-surface-variant-color);
+}
+
+// ホバー効果
+.hoverable {
+  transition: color 0.2s ease;
+
+  :hover {
+    opacity: 0.8;
+  }
+}
+
+// サイズバリエーション
+.small {
+  font-size: 0.875rem;
+}
+
+.large {
+  font-size: 1.25rem;
+}
+
+.xlarge {
+  font-size: 1.5rem;
+}
