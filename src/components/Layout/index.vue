@@ -1,10 +1,14 @@
 ﻿<script setup lang="ts"></script>
 
 <template>
-  <div>
+  <div class="layout">
     <Header />
     <slot />
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.layout {
+  background-color: gainsboro;
+}
+</style>
