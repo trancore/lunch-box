@@ -16,6 +16,19 @@ const config: StorybookConfig = {
       };
     }
 
+    config.css = {
+      ...config.css,
+      preprocessorOptions: {
+        ...(config.css && config.css.preprocessorOptions),
+        scss: {
+          ...(config.css &&
+            config.css.preprocessorOptions &&
+            (config.css.preprocessorOptions as any).scss),
+          additionalData: "@use '~/assets/styles/variables' as *;",
+        },
+      },
+    } as typeof config.css;
+
     return config;
   },
 };
