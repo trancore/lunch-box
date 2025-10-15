@@ -4,7 +4,7 @@ import ImageSplash from './index.vue';
 
 const meta = {
   component: ImageSplash,
-  title: 'Component/ImageSplash',
+  title: 'Component/Image/ImageSplash',
 } satisfies Meta<typeof ImageSplash>;
 
 export default meta;
