@@ -46,7 +46,7 @@ defineProps<Props>();
   display: flex;
   max-width: 270px;
 
-  ::v-deep .shop-image {
+  :deep(.shop-image) {
     width: 100%;
     object-fit: cover;
     aspect-ratio: 4 / 3;
