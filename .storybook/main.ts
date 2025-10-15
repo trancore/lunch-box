@@ -8,6 +8,7 @@ const config: StorybookConfig = {
     name: '@storybook/vue3-vite',
     options: { docgen: 'vue-component-meta' },
   },
+  staticDirs: ['../src/assets/images'],
   viteFinal: (config) => {
     if (config.resolve) {
       config.resolve.alias = {
