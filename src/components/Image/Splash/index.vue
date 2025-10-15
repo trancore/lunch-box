@@ -23,7 +23,7 @@ defineProps<Props>();
 
   .splash-image {
     width: calc(100%);
-    height: 400px;
+    height: 300px;
     object-fit: cover;
   }
 }
