@@ -21,6 +21,7 @@ export const Example: Story = {
     genre: 'イタリアン',
     businessHours: '11:00 - 22:00',
     rating: 4,
+    canExpenses: true,
   },
 };
 

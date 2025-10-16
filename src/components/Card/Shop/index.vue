@@ -12,15 +12,25 @@ type Props = {
   businessHours?: string;
   // 評価
   rating?: number;
+  // 経費計算可否
+  canExpenses?: boolean;
 };
 
-defineProps<Props>();
+withDefaults(defineProps<Props>(), {
+  canExpenses: false,
+});
 </script>
 
 <template>
   <Card class="shop-card">
     <template #header>
-      <!-- TODO: no image -->
+      <Icon
+        v-if="canExpenses"
+        class="can-expenses"
+        name="DOLLAR"
+        type="primary"
+        :size="2"
+      />
       <Image
         image-class="shop-image"
         alt="shop"
@@ -44,7 +54,15 @@ defineProps<Props>();
 <style lang="scss" scoped>
 .shop-card {
   display: flex;
+  position: relative;
   max-width: 270px;
+
+  .can-expenses {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-weight: bold;
+  }
 
   :deep(.shop-image) {
     width: 100%;
