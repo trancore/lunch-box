@@ -8,19 +8,19 @@
   },
   "packageManager": "pnpm@10.15.1",
   "scripts": {
-    "type:check": "vue-tsc --build",
-    "build:only": "vite-ssg build",
-    "generate:clasp": "node ./scripts/generate-clasp-json.ts",
     "build": "pnpm type:check && pnpm build:only && pnpm generate:clasp && cp ./scripts/main.js dist",
-    "lint": "eslint . --fix",
-    "format": "prettier --write src/",
+    "build:only": "vite-ssg build",
     "build:storybook": "storybook build",
-    "storybook": "storybook dev -p 6006 --no-open",
     "dev": "vite",
+    "format": "prettier --write src/",
+    "generate:clasp": "node ./scripts/generate-clasp-json.ts",
+    "lint": "eslint . --fix",
     "preview": "vite preview",
     "pull": "clasp pull",
     "push": "cp appsscript.json dist && clasp push",
-    "push:all": "pnpm build && pnpm push"
+    "push:all": "pnpm build && pnpm push",
+    "storybook": "storybook dev -p 6006 --no-open",
+    "type:check": "vue-tsc --build"
   },
   "devDependencies": {
     "@google/clasp": "3.0.6-alpha",
