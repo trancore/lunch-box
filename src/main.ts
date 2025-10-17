@@ -3,14 +3,13 @@ import Aura from '@primeuix/themes/aura';
 import { createPinia } from 'pinia';
 import 'primeicons/primeicons.css';
 import primeVue from 'primevue/config';
-import { createApp } from 'vue';
+import { ViteSSG } from 'vite-ssg';
+import { createMemoryHistory, createWebHashHistory } from 'vue-router';
 
 import '~/assets/styles/base.scss';
+import { routes } from '~/router';
 
 import App from './App.vue';
-import router from './router';
-
-const app = createApp(App);
 
 /**
  * @see https://primevue.org/theming/styled/#colors
@@ -55,13 +54,22 @@ export const preset = definePreset(Aura, {
   },
 });
 
-app.use(createPinia());
-app.use(router);
-app.use(primeVue, {
-  theme: {
-    preset: preset,
-    ripple: true,
+export const createApp = ViteSSG(
+  App,
+  {
+    routes,
+    history: import.meta.env.SSR
+      ? createMemoryHistory()
+      : createWebHashHistory(),
   },
-});
-
-app.mount('#app');
+  (ctx) => {
+    const { app } = ctx;
+    app.use(createPinia());
+    app.use(primeVue, {
+      theme: {
+        preset: preset,
+        ripple: true,
+      },
+    });
+  },
+);

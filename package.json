@@ -9,7 +9,7 @@
   "packageManager": "pnpm@10.15.1",
   "scripts": {
     "type:check": "vue-tsc --build",
-    "build:only": "vite build",
+    "build:only": "vite-ssg build",
     "generate:clasp": "node ./scripts/generate-clasp-json.ts",
     "build": "pnpm type:check && pnpm build:only && pnpm generate:clasp && cp ./scripts/main.js dist",
     "lint": "eslint . --fix",
@@ -55,6 +55,7 @@
     "vite": "^7.1.7",
     "vite-plugin-singlefile": "^2.3.0",
     "vite-plugin-vue-devtools": "^8.0.2",
+    "vite-ssg": "^28.2.1",
     "vite-svg-loader": "^5.1.0",
     "vite-tsconfig-paths": "^5.1.4",
     "vue": "^3.5.22",
