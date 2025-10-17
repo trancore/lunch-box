@@ -34,7 +34,11 @@ withDefaults(defineProps<Props>(), {
       <Image
         image-class="shop-image"
         alt="shop"
-        :src="imageUrl ?? '/src/assets/images/no-image.png'"
+        :src="
+          imageUrl ??
+          // no-image
+          'https://drive.google.com/thumbnail?id=1nNC-25R33LyXVhS7DBcTbWnP58ylOccO'
+        "
       />
     </template>
     <template #title>{{ name }}</template>
@@ -55,7 +59,7 @@ withDefaults(defineProps<Props>(), {
 .shop-card {
   display: flex;
   position: relative;
-  max-width: 270px;
+  width: 270px;
 
   .can-expenses {
     position: absolute;
