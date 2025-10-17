@@ -8,6 +8,7 @@ const config: StorybookConfig = {
     name: '@storybook/vue3-vite',
     options: { docgen: 'vue-component-meta' },
   },
+  staticDirs: ['../src/assets/images'],
   viteFinal: (config) => {
     if (config.resolve) {
       config.resolve.alias = {
@@ -15,6 +16,19 @@ const config: StorybookConfig = {
         '~': path.resolve(__dirname, '../src'),
       };
     }
+
+    config.css = {
+      ...config.css,
+      preprocessorOptions: {
+        ...(config.css && config.css.preprocessorOptions),
+        scss: {
+          ...(config.css &&
+            config.css.preprocessorOptions &&
+            (config.css.preprocessorOptions as any).scss),
+          additionalData: "@use '~/assets/styles/variables' as *;",
+        },
+      },
+    } as typeof config.css;
 
     return config;
   },
