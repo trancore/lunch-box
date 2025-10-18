@@ -1,5 +1,42 @@
 ﻿<script setup lang="ts"></script>
 
-<template>top</template>
+<template>
+  <div class="top-page">
+    <div class="splash-area">
+      <ImageSplash
+        src="https://drive.google.com/thumbnail?id=1iMnuWgMBmR0us47IQQ1z-ldRIBfu2Nil"
+        alt="splash"
+      />
+      <p class="catch-text">今日のランチは何にする？</p>
+    </div>
+    <div class="content">
+      <CardRecommend />
+    </div>
+  </div>
+</template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.top-page {
+  > .splash-area {
+    position: relative;
+    text-align: center;
+
+    > .catch-text {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 2.5rem;
+      font-weight: bold;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
+  }
+
+  > .content {
+    margin: 0 auto;
+    padding: 44px 0;
+    max-width: $breakpoint-lg;
+  }
+}
+</style>
