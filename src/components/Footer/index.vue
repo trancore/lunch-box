@@ -24,7 +24,7 @@ import lunchBoxIcon from '~/assets/images/lunch-box_icon.svg';
   justify-content: space-evenly;
   height: 200px;
   background-color: var(--p-surface-800);
-  color: var(--p-surface-200);
+  color: white;
 
   & > .logo-area {
     display: flex;

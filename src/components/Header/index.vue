@@ -33,7 +33,7 @@ const text1 = ref('');
   justify-content: center;
   gap: 40px;
   background-color: var(--p-primary-color);
-  color: var(--p-surface-200);
+  color: white;
 
   & > .logo {
     display: flex;
