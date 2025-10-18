@@ -1,5 +1,6 @@
 ﻿<script setup lang="ts">
 import { ref } from 'vue';
+import { RouterLink } from 'vue-router';
 
 import lunchBoxIcon from '~/assets/images/lunch-box_icon.svg';
 
@@ -19,9 +20,8 @@ const text1 = ref('');
       </InputGroupAddon>
     </InputGroup>
     <nav class="nav">
-      <!-- TODO: リンクにする -->
-      <p>トップ</p>
-      <p>お店を探す</p>
+      <RouterLink to="/">トップ</RouterLink>
+      <RouterLink to="search">お店を探す</RouterLink>
     </nav>
   </header>
 </template>

@@ -2,9 +2,11 @@ import Aura from '@primeuix/themes/aura';
 import { type Preview, setup } from '@storybook/vue3-vite';
 import 'primeicons/primeicons.css';
 import primeVue from 'primevue/config';
+import { vueRouter } from 'storybook-vue3-router';
 import type { App } from 'vue';
 
 import '~/assets/styles/base.scss';
+import { routes } from '~/router';
 
 import { preset } from '../src/main';
 
@@ -18,6 +20,7 @@ setup((app: App) => {
 });
 
 const preview: Preview = {
+  decorators: [vueRouter(routes)],
   parameters: {
     controls: {
       matchers: {

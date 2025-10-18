@@ -1,5 +1,7 @@
 ﻿<script setup lang="ts">
 type Props = {
+  // 店舗ID
+  id: string;
   // 画像URL
   imageUrl?: string;
   // 店舗名
@@ -22,37 +24,39 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <Card class="shop-card">
-    <template #header>
-      <Icon
-        v-if="canExpenses"
-        class="can-expenses"
-        name="DOLLAR"
-        type="primary"
-        :size="2"
-      />
-      <Image
-        image-class="shop-image"
-        alt="shop"
-        :src="
-          imageUrl ??
-          // no-image
-          'https://drive.google.com/thumbnail?id=1nNC-25R33LyXVhS7DBcTbWnP58ylOccO'
-        "
-      />
-    </template>
-    <template #title>{{ name }}</template>
-    <template #subtitle>
-      <p class="subtitle">ランチ値段：~ {{ price ?? '??? ' }}円</p>
-    </template>
-    <template #content>
-      <p class="text-list">ジャンル：{{ genre ?? '???' }}</p>
-      <p class="text-list">営業時間：{{ businessHours ?? '???' }}</p>
-    </template>
-    <template #footer>
-      <Rating v-if="rating" :default-value="rating" readonly />
-    </template>
-  </Card>
+  <RouterLink class="hoverable" :to="`/shop/${id}`">
+    <Card class="shop-card">
+      <template #header>
+        <Icon
+          v-if="canExpenses"
+          class="can-expenses"
+          name="DOLLAR"
+          type="primary"
+          :size="2"
+        />
+        <Image
+          image-class="shop-image"
+          alt="shop"
+          :src="
+            imageUrl ??
+            // no-image
+            'https://drive.google.com/thumbnail?id=1nNC-25R33LyXVhS7DBcTbWnP58ylOccO'
+          "
+        />
+      </template>
+      <template #title>{{ name }}</template>
+      <template #subtitle>
+        <p class="subtitle">ランチ値段：~ {{ price ?? '??? ' }}円</p>
+      </template>
+      <template #content>
+        <p class="text-list">ジャンル：{{ genre ?? '???' }}</p>
+        <p class="text-list">営業時間：{{ businessHours ?? '???' }}</p>
+      </template>
+      <template #footer>
+        <Rating v-if="rating" :default-value="rating" readonly />
+      </template>
+    </Card>
+  </RouterLink>
 </template>
 
 <style lang="scss" scoped>
