@@ -15,6 +15,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Example: Story = {
   args: {
+    id: '1',
     imageUrl: '/src/assets/images/dummy-lunch.png',
     name: 'Shop Title',
     price: '1,500',
@@ -27,6 +28,7 @@ export const Example: Story = {
 
 export const Undefined: Story = {
   args: {
+    id: '2',
     name: 'UndefinedShop',
   },
 };

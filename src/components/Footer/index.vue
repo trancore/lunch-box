@@ -9,7 +9,7 @@ import lunchBoxIcon from '~/assets/images/lunch-box_icon.svg';
         <component :is="lunchBoxIcon" class="logo-icon" />
         <p class="logo-text">lunch-box</p>
       </div>
-      <p class="description secondary">もう、悩まない</p>
+      <p class="description">もう、悩まない</p>
     </div>
     <div class="link-area">
       <h3 class="heading">Contact</h3>
@@ -24,7 +24,7 @@ import lunchBoxIcon from '~/assets/images/lunch-box_icon.svg';
   justify-content: space-evenly;
   height: 200px;
   background-color: var(--p-surface-800);
-  color: var(--p-surface-200);
+  color: white;
 
   & > .logo-area {
     display: flex;
