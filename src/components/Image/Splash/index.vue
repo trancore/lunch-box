@@ -2,9 +2,14 @@
 type Props = {
   alt: string;
   src: string;
+  height?: number;
 };
 
-defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  height: 300,
+});
+
+const heightCss = props.height + 'px';
 </script>
 
 <template>
@@ -23,7 +28,7 @@ defineProps<Props>();
 
   .splash-image {
     width: calc(100%);
-    height: 300px;
+    height: v-bind(heightCss);
     object-fit: cover;
   }
 }
