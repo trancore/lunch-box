@@ -9,7 +9,7 @@ import lunchBoxIcon from '~/assets/images/lunch-box_icon.svg';
         <component :is="lunchBoxIcon" class="logo-icon" />
         <p class="logo-text">lunch-box</p>
       </div>
-      <p class="description secondary">もう、悩まない</p>
+      <p class="description">もう、悩まない</p>
     </div>
     <div class="link-area">
       <h3 class="heading">Contact</h3>
