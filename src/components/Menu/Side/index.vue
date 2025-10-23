@@ -108,7 +108,7 @@ const text = ref('');
 
   & > .side-menu {
     padding: 16px;
-    min-width: 300px;
+    min-width: 260px;
     background-color: white;
     border-radius: 15px;
 
@@ -140,7 +140,7 @@ const text = ref('');
               align-items: center;
               justify-content: space-between;
               padding-left: 22px;
-              width: 200px;
+              width: 180px;
             }
           }
 
