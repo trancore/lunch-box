@@ -18,3 +18,13 @@ export const Default: Story = {
     setup: () => ({ args }),
   }),
 };
+
+export const WithLongResult: Story = {
+  args: {},
+  render: (args) => ({
+    components: { MenuSide },
+    template:
+      '<MenuSide v-bind="args"><div style="height: 1000px">Long</div></MenuSide>',
+    setup: () => ({ args }),
+  }),
+};
