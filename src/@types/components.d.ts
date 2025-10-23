@@ -11,6 +11,7 @@ declare module 'vue' {
     Card: typeof import('primevue/card')['default']
     CardRecommend: typeof import('./../components/Card/Recommend/index.vue')['default']
     CardShop: typeof import('./../components/Card/Shop/index.vue')['default']
+    Checkbox: typeof import('primevue/checkbox')['default']
     Footer: typeof import('./../components/Footer/index.vue')['default']
     Header: typeof import('./../components/Header/index.vue')['default']
     Icon: typeof import('./../components/Icon/index.vue')['default']
@@ -20,12 +21,19 @@ declare module 'vue' {
     InputGroupAddon: typeof import('primevue/inputgroupaddon')['default']
     InputText: typeof import('primevue/inputtext')['default']
     Layout: typeof import('./../components/Layout/index.vue')['default']
+    MenuResult: typeof import('./../components/Menu/Result/index.vue')['default']
+    MenuSide: typeof import('./../components/Menu/Side/index.vue')['default']
     PageDetail: typeof import('./../components/Page/Detail/index.vue')['default']
     PageSearch: typeof import('./../components/Page/Search/index.vue')['default']
     PageTop: typeof import('./../components/Page/Top/index.vue')['default']
+    PanelMenu: typeof import('primevue/panelmenu')['default']
     Rating: typeof import('primevue/rating')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Select: typeof import('primevue/select')['default']
+    Slider: typeof import('primevue/slider')['default']
+  }
+  export interface GlobalDirectives {
+    Ripple: typeof import('primevue/ripple')['default']
   }
 }
