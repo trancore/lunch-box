@@ -12,6 +12,8 @@ const ICON_NAME = {
   SEARCH: 'pi pi-search',
   CARET_RIGHT: 'pi pi-caret-right',
   DOLLAR: 'pi pi-dollar',
+  CHEVRON_DOWN: 'pi pi-chevron-down',
+  CHEVRON_RIGHT: 'pi  pi-chevron-right',
 } as const;
 
 const ICON_TYPE = ['primary', 'secondary'] as const;

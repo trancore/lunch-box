@@ -36,7 +36,7 @@
   > .content {
     margin: 0 auto;
     padding: 44px 0;
-    max-width: $breakpoint-lg;
+    max-width: $breakpoint-xl;
   }
 }
 </style>

@@ -16,3 +16,11 @@ export const Top: Story = {
     alt: 'splash',
   },
 };
+
+export const SearchAndShopDetail: Story = {
+  args: {
+    src: '/src/assets/images/splash.png',
+    alt: 'splash',
+    height: 150,
+  },
+};
