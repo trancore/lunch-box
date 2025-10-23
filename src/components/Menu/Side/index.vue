@@ -104,9 +104,12 @@ const text = ref('');
 <style lang="scss" scoped>
 .content {
   display: flex;
+  align-items: flex-start;
   gap: 24px;
 
   & > .side-menu {
+    position: sticky;
+    top: 50px;
     padding: 16px;
     min-width: 260px;
     background-color: white;
@@ -158,6 +161,8 @@ const text = ref('');
         gap: 16px;
 
         & > .price-renge-form {
+          padding: 0 8px;
+
           & > .price-renge-texts {
             display: flex;
             justify-content: space-between;
