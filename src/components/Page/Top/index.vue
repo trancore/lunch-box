@@ -1,12 +1,11 @@
-﻿<script setup lang="ts"></script>
+﻿<script setup lang="ts">
+const imageUrlSplash = IMAGE_URL.SPLASH;
+</script>
 
 <template>
   <div class="top-page">
     <div class="splash-area">
-      <ImageSplash
-        src="https://drive.google.com/thumbnail?id=1iMnuWgMBmR0us47IQQ1z-ldRIBfu2Nil"
-        alt="splash"
-      />
+      <ImageSplash alt="splash" :src="imageUrlSplash" />
       <p class="catch-text">今日のランチは何にする？</p>
     </div>
     <div class="content">
