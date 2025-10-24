@@ -5,7 +5,7 @@ const imageUrlSplash = IMAGE_URL.SPLASH;
 <template>
   <div class="search-page">
     <div class="splash-area">
-      <ImageSplash alt="splash" :src="imageUrlSplash" :height="150" />
+      <ImageSplash alt="splash" :src="imageUrlSplash" :height="200" />
     </div>
     <div class="content">
       <MenuSide>
