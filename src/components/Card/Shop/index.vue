@@ -24,7 +24,7 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <RouterLink class="hoverable" :to="`/shop/${id}`">
+  <RouterLink class="hoverable" :to="`/shops/${id}`">
     <Card class="shop-card">
       <template #header>
         <Icon

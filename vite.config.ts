@@ -25,7 +25,8 @@ export default defineConfig({
       collapseSamePrefixes: true,
     }),
     AutoImport({
-      imports: ['vue'],
+      imports: ['vue', 'vue-router', 'pinia'],
+      dirs: ['src/consts'],
       dts: 'src/@types/auto-imports.d.ts',
     }),
   ],
