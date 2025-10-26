@@ -19,7 +19,18 @@ export default defineConfig({
     tsconfigPaths({ loose: true }),
     svgLoader(),
     Components({
-      resolvers: [PrimeVueResolver()],
+      resolvers: [
+        PrimeVueResolver(), // カスタムresolverを追加
+        (name) => {
+          // 'L'で始まるコンポーネントをvue-leafletから自動インポート
+          if (name.match(/^L[A-Z]/)) {
+            return {
+              name,
+              from: '@vue-leaflet/vue-leaflet',
+            };
+          }
+        },
+      ],
       dts: 'src/@types/components.d.ts',
       directoryAsNamespace: true,
       collapseSamePrefixes: true,
