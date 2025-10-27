@@ -1,9 +1,5 @@
 import { definePreset } from '@primeuix/themes';
 import Aura from '@primeuix/themes/aura';
-import { Icon } from 'leaflet';
-import markerIconUrl2x from 'leaflet/dist/images/marker-icon-2x.png';
-import markerIconUrl from 'leaflet/dist/images/marker-icon.png';
-import markerShadowUrl from 'leaflet/dist/images/marker-shadow.png';
 import 'leaflet/dist/leaflet.css';
 import { createPinia } from 'pinia';
 import 'primeicons/primeicons.css';
@@ -60,17 +56,30 @@ export const preset = definePreset(Aura, {
 });
 
 /**
- * Leafletのマーカーアイコンのパスが正しく設定されていない問題の修正
+ * Leafletのアイコン設定
+ *
+ * Leafletのマーカーアイコンのパスが正しく設定されていない問題を修正している。
  *
  * @see https://vue2-leaflet.netlify.app/quickstart/#marker-icons-are-missing
  */
-// アイコンのパス修正
-delete Icon.Default.prototype._getIconUrl;
-Icon.Default.mergeOptions({
-  iconRetinaUrl: markerIconUrl2x,
-  iconUrl: markerIconUrl,
-  shadowUrl: markerShadowUrl,
-});
+async function setupLeaflet() {
+  const { Icon } = await import('leaflet');
+  const markerIconUrl = (await import('leaflet/dist/images/marker-icon.png'))
+    .default;
+  const markerIconUrl2x = (
+    await import('leaflet/dist/images/marker-icon-2x.png')
+  ).default;
+  const markerShadowUrl = (
+    await import('leaflet/dist/images/marker-shadow.png')
+  ).default;
+
+  delete Icon.Default.prototype._getIconUrl;
+  Icon.Default.mergeOptions({
+    iconRetinaUrl: markerIconUrl2x,
+    iconUrl: markerIconUrl,
+    shadowUrl: markerShadowUrl,
+  });
+}
 
 export const createApp = ViteSSG(
   App,
@@ -80,7 +89,7 @@ export const createApp = ViteSSG(
       ? createMemoryHistory()
       : createWebHashHistory(),
   },
-  (ctx) => {
+  async (ctx) => {
     const { app } = ctx;
     app.use(createPinia());
     app.use(primeVue, {
@@ -89,5 +98,10 @@ export const createApp = ViteSSG(
         ripple: true,
       },
     });
+
+    // windowsの参照エラーが出るためクライアントサイドでのみ実行
+    if (!import.meta.env.SSR) {
+      await setupLeaflet();
+    }
   },
 );
