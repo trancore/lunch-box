@@ -8,12 +8,16 @@ type Props = {
 };
 
 const ICON_NAME = {
-  SHOPPING_BAG: 'pi pi-shopping-bag',
-  SEARCH: 'pi pi-search',
+  CALENDAR_TIMES: 'pi pi-calendar-times',
   CARET_RIGHT: 'pi pi-caret-right',
-  DOLLAR: 'pi pi-dollar',
   CHEVRON_DOWN: 'pi pi-chevron-down',
   CHEVRON_RIGHT: 'pi  pi-chevron-right',
+  CLOCK: 'pi  pi-clock',
+  DOLLAR: 'pi pi-dollar',
+  MAP_MARKER: 'pi pi-map-marker',
+  SEARCH: 'pi pi-search',
+  SHOPPING_BAG: 'pi pi-shopping-bag',
+  SPARKLES: 'pi pi-sparkles',
 } as const;
 
 const ICON_TYPE = ['primary', 'secondary'] as const;
