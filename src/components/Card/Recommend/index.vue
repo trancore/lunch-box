@@ -108,6 +108,9 @@ const selectedRating = ref(undefined);
   display: flex;
   justify-content: space-around;
   padding: 16px;
-  background-color: var(--p-stone-800);
+
+  @media (prefers-color-scheme: dark) {
+    background-color: var(--p-stone-800);
+  }
 }
 </style>
