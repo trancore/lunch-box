@@ -2,7 +2,7 @@
 type Props = {
   lat: number;
   lng: number;
-  tooltipText?: string;
+  tooltipText: string;
 };
 
 const TILE_PROVIDERS = [
@@ -44,7 +44,7 @@ const location = ref<[number, number]>([props.lat, props.lng]);
         layerType="overlay"
       />
       <LMarker :latLng="location">
-        <LTooltip v-if="tooltipText">{{ tooltipText }}</LTooltip>
+        <LTooltip>{{ tooltipText }}</LTooltip>
       </LMarker>
     </LMap>
   </div>
