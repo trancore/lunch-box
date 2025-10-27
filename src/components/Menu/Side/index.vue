@@ -112,8 +112,12 @@ const text = ref('');
     top: 50px;
     padding: 16px;
     min-width: 260px;
-    background-color: white;
     border-radius: 15px;
+    background-color: white;
+
+    @media (prefers-color-scheme: dark) {
+      background-color: black;
+    }
 
     & > .side-menu-content {
       display: flex;

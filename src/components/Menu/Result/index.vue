@@ -24,10 +24,14 @@
 
 <style lang="scss" scoped>
 .content {
-  background-color: white;
+  width: 100%;
   padding: 24px;
   border-radius: 15px;
-  width: 100%;
+  background-color: white;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: black;
+  }
 
   .title {
     display: flex;
