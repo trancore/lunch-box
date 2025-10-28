@@ -103,6 +103,10 @@ const rating = ref(4.5);
       display: flex;
       gap: 24px;
 
+      @media (max-width: $breakpoint-sm) {
+        flex-direction: column;
+      }
+
       & > .information {
         flex: 1;
         border-radius: 15px;

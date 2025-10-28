@@ -8,6 +8,7 @@ type Props = {
 };
 
 const ICON_NAME = {
+  BARS: 'pi pi-bars',
   CALENDAR_TIMES: 'pi pi-calendar-times',
   CARET_RIGHT: 'pi pi-caret-right',
   CHEVRON_DOWN: 'pi pi-chevron-down',

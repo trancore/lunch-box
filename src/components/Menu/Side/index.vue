@@ -107,6 +107,12 @@ const text = ref('');
   align-items: flex-start;
   gap: 24px;
 
+  @media (max-width: $breakpoint-sm) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
   & > .side-menu {
     position: sticky;
     top: 50px;

@@ -90,6 +90,12 @@ const selectedRating = ref(undefined);
   align-items: center;
   justify-content: space-between;
 
+  @media (max-width: $breakpoint-sm) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
   & > .title {
     display: flex;
     align-items: center;
@@ -107,10 +113,17 @@ const selectedRating = ref(undefined);
 .content {
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
   padding: 16px;
 
   @media (prefers-color-scheme: dark) {
     background-color: var(--p-stone-800);
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 16px;
   }
 }
 </style>

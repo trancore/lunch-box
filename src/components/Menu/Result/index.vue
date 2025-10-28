@@ -33,6 +33,10 @@
     background-color: black;
   }
 
+  @media (max-width: $breakpoint-sm) {
+    padding: 24px 8px;
+  }
+
   .title {
     display: flex;
     align-items: center;
@@ -46,6 +50,11 @@
     grid-template: repeat(3, 1fr) / repeat(3, 1fr);
     place-items: center;
     gap: 16px;
+
+    @media (max-width: $breakpoint-sm) {
+      grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+      gap: 8px;
+    }
   }
 }
 </style>

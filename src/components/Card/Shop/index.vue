@@ -63,7 +63,6 @@ withDefaults(defineProps<Props>(), {
 .shop-card {
   display: flex;
   position: relative;
-  width: 270px;
   outline: 1px solid var(--p-primary-color);
 
   @media (prefers-color-scheme: dark) {
