@@ -70,6 +70,15 @@ const selectedRating = ref(undefined);
           :businessHours="'11:00 ~ 14:00'"
           :rating="4"
         />
+        <CardShop
+          :id="'4'"
+          :imageUrl="'https://drive.google.com/thumbnail?id=1Z7DyO3snqH7QPwlyvB8-qzT_IRr-pLzE'"
+          :name="'店舗名'"
+          :price="'1000'"
+          :genre="'イタリアン'"
+          :businessHours="'11:00 ~ 14:00'"
+          :rating="4"
+        />
       </div>
     </template>
   </Card>
@@ -80,6 +89,12 @@ const selectedRating = ref(undefined);
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media (max-width: $breakpoint-sm) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
 
   & > .title {
     display: flex;
@@ -98,7 +113,17 @@ const selectedRating = ref(undefined);
 .content {
   display: flex;
   justify-content: space-around;
-  background-color: gainsboro;
+  flex-wrap: wrap;
   padding: 16px;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: var(--p-stone-800);
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 16px;
+  }
 }
 </style>

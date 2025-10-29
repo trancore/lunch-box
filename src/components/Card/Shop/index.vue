@@ -63,7 +63,11 @@ withDefaults(defineProps<Props>(), {
 .shop-card {
   display: flex;
   position: relative;
-  width: 270px;
+  outline: 1px solid var(--p-primary-color);
+
+  @media (prefers-color-scheme: dark) {
+    outline: 1px solid white;
+  }
 
   .can-expenses {
     position: absolute;
@@ -76,6 +80,7 @@ withDefaults(defineProps<Props>(), {
     width: 100%;
     object-fit: cover;
     aspect-ratio: 4 / 3;
+    border-radius: var(--p-card-border-radius) var(--p-card-border-radius) 0 0;
   }
 }
 

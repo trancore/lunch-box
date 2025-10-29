@@ -107,13 +107,23 @@ const text = ref('');
   align-items: flex-start;
   gap: 24px;
 
+  @media (max-width: $breakpoint-sm) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
   & > .side-menu {
     position: sticky;
     top: 50px;
     padding: 16px;
     min-width: 260px;
-    background-color: white;
     border-radius: 15px;
+    background-color: white;
+
+    @media (prefers-color-scheme: dark) {
+      background-color: black;
+    }
 
     & > .side-menu-content {
       display: flex;

@@ -103,11 +103,20 @@ const rating = ref(4.5);
       display: flex;
       gap: 24px;
 
+      @media (max-width: $breakpoint-sm) {
+        flex-direction: column;
+      }
+
       & > .information {
         flex: 1;
-        background-color: white;
         border-radius: 15px;
         padding: 16px;
+
+        background-color: white;
+
+        @media (prefers-color-scheme: dark) {
+          background-color: black;
+        }
 
         & > .sub-title {
           display: flex;
@@ -131,9 +140,13 @@ const rating = ref(4.5);
 
       & > .menu {
         flex: 3;
-        background-color: white;
         border-radius: 15px;
         padding: 16px;
+        background-color: white;
+
+        @media (prefers-color-scheme: dark) {
+          background-color: black;
+        }
 
         & > .menu-items {
           display: grid;
@@ -153,9 +166,13 @@ const rating = ref(4.5);
 
     & > .map {
       margin-top: 24px;
-      background-color: white;
       border-radius: 15px;
       padding: 16px;
+      background-color: white;
+
+      @media (prefers-color-scheme: dark) {
+        background-color: black;
+      }
     }
   }
 }

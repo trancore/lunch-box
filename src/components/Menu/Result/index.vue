@@ -24,10 +24,18 @@
 
 <style lang="scss" scoped>
 .content {
-  background-color: white;
+  width: 100%;
   padding: 24px;
   border-radius: 15px;
-  width: 100%;
+  background-color: white;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: black;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    padding: 24px 8px;
+  }
 
   .title {
     display: flex;
@@ -42,6 +50,11 @@
     grid-template: repeat(3, 1fr) / repeat(3, 1fr);
     place-items: center;
     gap: 16px;
+
+    @media (max-width: $breakpoint-sm) {
+      grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+      gap: 8px;
+    }
   }
 }
 </style>
