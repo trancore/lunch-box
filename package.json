@@ -44,6 +44,7 @@
     "eslint": "^9.33.0",
     "eslint-plugin-storybook": "^9.1.10",
     "eslint-plugin-vue": "~10.4.0",
+    "gas-client": "^1.2.1",
     "jiti": "^2.5.1",
     "leaflet": "^1.9.4",
     "npm-run-all2": "^8.0.4",
