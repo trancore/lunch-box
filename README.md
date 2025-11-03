@@ -16,6 +16,29 @@
 | eslint                     | JavaScript静的解析ツール       |
 | prettier                   | 整形ツール                     |
 
+## ER図
+
+```mermaid
+---
+title: Lunch Box ER図
+---
+
+erDiagram
+    SHOPS {
+        number id PK "店舗ID"
+        string url "URL"
+        string(30) name "店舗名"
+        string genre "ジャンル"
+        number budget  "予算"
+        date open_at "開店時間"
+        date close_at "閉店時間"
+        number review "レビュー"
+        string(300) introduction "紹介文"
+        timestamp created_at "作成日"
+        timestamp updated_at "更新日"
+    }
+```
+
 ## 画面イメージ
 
 ### トップ画面
@@ -32,10 +55,15 @@
 
 ## 🌳環境変数
 
+スクリプトIDは、.clasp.jsonに指定する必要があります。  
+このスクリプトIDをリポジトリ上に保存しないために、.envで管理しています。
+
 ```dotenv
 # GASのスクリプトID
 SCRIPT_ID=
 ```
+
+一方で、スプレッドシートID（SPREADSHEET_ID）、店舗一覧を記載したシートID（SHOP_LIST_SHEET_ID）はGASのスクリプトプロパティに指定してください。
 
 ## scripts/について
 
@@ -45,4 +73,7 @@ GASのスクリプトIDをGitHubにpushしないようにするため、.envに�
 
 ### main.ts
 
-Webアプリの配信のために必要なGAS用main.tsファイル。
+Webアプリの配信のために必要なGAS用main.tsファイルです。
+
+また、クライアント（HTML）側でGAS APIを実行するために、関数を定義しています。  
+この関数は、GAS（サーバー）側での実行数をできるがぎり少なくするために、関数の処理をできるだけ大きくするように設計しています。
