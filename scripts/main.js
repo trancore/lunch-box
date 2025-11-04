@@ -20,7 +20,5 @@ function getSpreadsheetDataRangeValues(spreadsheetId, sheetId) {
       cell instanceof Date ? cell.toISOString() : String(cell),
     ),
   );
-
-  console.log('🚀 ~ safeValues:', safeValues);
   return safeValues;
 }

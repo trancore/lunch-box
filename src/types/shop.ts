@@ -1,4 +1,6 @@
-﻿export type ShopList = {
+﻿export type Rating = '☆☆☆☆☆' | '★☆☆☆☆' | '★★☆☆☆' | '★★★☆☆' | '★★★★☆' | '★★★★★';
+
+export type ShopList = {
   /** 店舗ID */
   id: number;
   /** URL */
@@ -13,8 +15,8 @@
   openAt: Date;
   /** 閉店時間 */
   closeAt: Date;
-  /** レビュー */
-  review: number;
+  /** レーティング */
+  rating: Rating;
   /** 紹介文 */
   introduction: string;
   /** 作成日 */

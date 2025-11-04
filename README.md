@@ -32,7 +32,7 @@ erDiagram
         number budget  "予算"
         date open_at "開店時間"
         date close_at "閉店時間"
-        number review "レビュー"
+        number rating "レーティング"
         string(300) introduction "紹介文"
         timestamp created_at "作成日"
         timestamp updated_at "更新日"
