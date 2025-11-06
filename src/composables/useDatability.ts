@@ -20,10 +20,8 @@ export async function useDatability<
         name: row[2],
         genre: row[3],
         budget: Number(row[4]),
-        // 時間情報のみを扱うことができないため、1970-01-01の日付を付与してDate型に変換
-        openAt: new Date(`1970-01-01T${row[5]}`),
-        // 時間情報のみを扱うことができないため、1970-01-01の日付を付与してDate型に変換
-        closeAt: new Date(`1970-01-01T${row[6]}`),
+        openAt: new Date(row[5]),
+        closeAt: new Date(row[6]),
         rating: row[7] as unknown as Rating,
         introduction: row[8],
         createdAt: new Date(row[9]),

@@ -13,8 +13,22 @@ const ratingList = [
   { rating: '5以上' },
 ];
 
-const selectedGenre = ref(undefined);
-const selectedRating = ref(undefined);
+const recommendShopList = ref<ShopList>([]);
+const recommendShopListStatus = ref<Status>('idle');
+const selectedGenre = ref('イタリアン');
+const selectedRating = ref(3);
+
+const { getBusinessHours } = format();
+const { transfoemRatingToNumber } = transform();
+
+onMounted(async () => {
+  const { data, status } = await useDatability('recommend', {
+    genre: selectedGenre.value,
+    rating: selectedRating.value,
+  });
+  recommendShopList.value = data.value;
+  recommendShopListStatus.value = status.value;
+});
 </script>
 
 <template>
@@ -42,43 +56,20 @@ const selectedRating = ref(undefined);
       </div>
     </template>
     <template #content>
-      <div class="content">
+      <div v-if="recommendShopListStatus === 'success'" class="content fadeup">
         <CardShop
-          :id="'1'"
+          v-for="shop in recommendShopList"
+          :id="String(shop.id)"
           :imageUrl="'https://drive.google.com/thumbnail?id=1Z7DyO3snqH7QPwlyvB8-qzT_IRr-pLzE'"
-          :name="'店舗名'"
-          :price="'1000'"
-          :genre="'イタリアン'"
-          :businessHours="'11:00 ~ 14:00'"
-          :rating="4"
+          :name="shop.name"
+          :price="String(shop.budget)"
+          :genre="shop.genre"
+          :businessHours="getBusinessHours(shop.openAt, shop.closeAt)"
+          :rating="transfoemRatingToNumber(shop.rating)"
         />
-        <CardShop
-          :id="'2'"
-          :imageUrl="'https://drive.google.com/thumbnail?id=1Z7DyO3snqH7QPwlyvB8-qzT_IRr-pLzE'"
-          :name="'店舗名'"
-          :price="'1000'"
-          :genre="'イタリアン'"
-          :businessHours="'11:00 ~ 14:00'"
-          :rating="4"
-        />
-        <CardShop
-          :id="'3'"
-          :imageUrl="'https://drive.google.com/thumbnail?id=1Z7DyO3snqH7QPwlyvB8-qzT_IRr-pLzE'"
-          :name="'店舗名'"
-          :price="'1000'"
-          :genre="'イタリアン'"
-          :businessHours="'11:00 ~ 14:00'"
-          :rating="4"
-        />
-        <CardShop
-          :id="'4'"
-          :imageUrl="'https://drive.google.com/thumbnail?id=1Z7DyO3snqH7QPwlyvB8-qzT_IRr-pLzE'"
-          :name="'店舗名'"
-          :price="'1000'"
-          :genre="'イタリアン'"
-          :businessHours="'11:00 ~ 14:00'"
-          :rating="4"
-        />
+      </div>
+      <div v-else class="content fadeup">
+        <SkeltonShop v-for="shop in Array(4)" />
       </div>
     </template>
   </Card>
@@ -113,8 +104,9 @@ const selectedRating = ref(undefined);
 .content {
   display: flex;
   justify-content: space-around;
-  flex-wrap: wrap;
+  height: 400px;
   padding: 16px;
+  gap: 1rem;
 
   @media (prefers-color-scheme: dark) {
     background-color: var(--p-stone-800);
