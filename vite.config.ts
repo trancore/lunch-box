@@ -37,7 +37,7 @@ export default defineConfig({
     }),
     AutoImport({
       imports: ['vue', 'vue-router', 'pinia'],
-      dirs: ['src/composables', 'src/consts'],
+      dirs: ['src/composables', 'src/consts', 'src/utils', 'src/types'],
       dts: 'src/@types/auto-imports.d.ts',
     }),
   ],
@@ -49,7 +49,10 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: '@use "~/assets/styles/variables" as *;',
+        additionalData: `
+        @use "~/assets/styles/animations" as *;
+        @use "~/assets/styles/variables" as *;
+      `,
       },
     },
   },

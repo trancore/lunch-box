@@ -1,30 +1,76 @@
-﻿import type { ShopList } from '~/types/shop';
+﻿type DataName = 'recommend' | 'search' | 'shops-detail';
+type RecommendOptions = {
+  genre: string;
+  rating: number;
+};
 
-import { useSpreadsheet } from './useSpreadsheet';
-
-type DataName = 'recommend' | 'search' | 'shops-detail';
-
-export async function useDatability(name: DataName) {
+export async function useDatability<
+  T extends DataName,
+  S extends RecommendOptions,
+>(name: T, options: T extends 'recommend' ? S : undefined) {
+  const { transfoemRatingToNumber } = transform();
   const { data, error, status, refreshData } = await useSpreadsheet();
 
   const shopList = computed<ShopList>(() => {
     const dataWithoutHeader = data.value?.slice(1) || [];
-    return dataWithoutHeader.map((row) => {
+    const result = dataWithoutHeader.map((row) => {
       return {
-        id: row[0],
+        id: Number(row[0]),
         url: row[1],
         name: row[2],
         genre: row[3],
-        budget: row[4],
-        openAt: row[5],
-        closeAt: row[6],
-        review: row[7],
+        budget: Number(row[4]),
+        openAt: new Date(row[5]),
+        closeAt: new Date(row[6]),
+        rating: row[7] as unknown as Rating,
         introduction: row[8],
-        createdAt: row[9],
-        updatedAt: row[10],
+        createdAt: new Date(row[9]),
+        updatedAt: new Date(row[10]),
       };
     });
+
+    switch (name) {
+      case 'recommend':
+        return filterRecommendShopList(result);
+      case 'search':
+      case 'shops-detail':
+        return result;
+      default:
+        return [];
+    }
   });
+
+  function filterRecommendShopList(shopList: ShopList) {
+    if (!options) return [];
+
+    const genre = options.genre;
+    const rating = options.rating;
+
+    const filteredGenreShopList = shopList.filter(
+      (shop) => shop.genre === genre,
+    );
+    const filteredGenreAndRatingShopList = filteredGenreShopList.filter(
+      (shop) => transfoemRatingToNumber(shop.rating) >= rating,
+    );
+
+    const result: ShopList = [];
+
+    const limit =
+      filteredGenreAndRatingShopList.length < 4
+        ? filteredGenreAndRatingShopList.length
+        : 4;
+    while (result.length < limit) {
+      const randomIndex = Math.floor(
+        Math.random() * filteredGenreAndRatingShopList.length,
+      );
+      const randomShop = filteredGenreAndRatingShopList[randomIndex];
+      if (randomShop && !result.includes(randomShop)) {
+        result.push(randomShop);
+      }
+    }
+
+    return result;
+  }
 
   async function refresh() {
     await refreshData();

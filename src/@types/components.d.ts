@@ -38,6 +38,8 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Select: typeof import('primevue/select')['default']
+    Skeleton: typeof import('primevue/skeleton')['default']
+    SkeltonShop: typeof import('./../components/Skelton/Shop/index.vue')['default']
     Slider: typeof import('primevue/slider')['default']
   }
   export interface GlobalDirectives {

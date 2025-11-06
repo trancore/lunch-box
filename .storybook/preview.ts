@@ -6,6 +6,7 @@ import primeVue from 'primevue/config';
 import { vueRouter } from 'storybook-vue3-router';
 import type { App } from 'vue';
 
+import '~/assets/styles/animations.scss';
 import '~/assets/styles/base.scss';
 import { routes } from '~/router';
 
