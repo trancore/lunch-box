@@ -1,24 +1,30 @@
 ﻿type DataName = 'recommend' | 'search' | 'shops-detail';
 type RecommendOptions = {
-  genre: string;
-  rating: number;
+  genre: (typeof GENRE_NAME_LIST)[number] | undefined;
+  rating: (typeof RATING_VALUE_LIST)[number] | undefined;
 };
+type Options<S> = S extends 'recommend'
+  ? Ref<RecommendOptions>
+  : Ref<undefined>;
 
-export async function useDatability<
-  T extends DataName,
-  S extends RecommendOptions,
->(name: T, options: T extends 'recommend' ? S : undefined) {
+export function useDatability<S extends DataName>(
+  name: S,
+  options: Options<S>,
+) {
   const { transfoemRatingToNumber } = transform();
-  const { data, error, status, refreshData } = await useSpreadsheet();
+
+  const status = ref<Status>('idle');
+  const data = ref<SheetValues | undefined>(undefined);
+  const error = ref<Error>();
 
   const shopList = computed<ShopList>(() => {
     const dataWithoutHeader = data.value?.slice(1) || [];
-    const result = dataWithoutHeader.map((row) => {
+    return dataWithoutHeader.map((row) => {
       return {
         id: Number(row[0]),
         url: row[1],
         name: row[2],
-        genre: row[3],
+        genre: row[3] as (typeof GENRE_NAME_LIST)[number],
         budget: Number(row[4]),
         openAt: new Date(row[5]),
         closeAt: new Date(row[6]),
@@ -28,30 +34,34 @@ export async function useDatability<
         updatedAt: new Date(row[10]),
       };
     });
+  });
 
+  function whichShopList(options: Options<S>) {
     switch (name) {
       case 'recommend':
-        return filterRecommendShopList(result);
+        return filterRecommendShopList(shopList.value, options);
       case 'search':
       case 'shops-detail':
-        return result;
+        return shopList.value;
       default:
         return [];
     }
-  });
+  }
 
-  function filterRecommendShopList(shopList: ShopList) {
-    if (!options) return [];
+  function filterRecommendShopList(shopList: ShopList, options: Options<S>) {
+    if (!options) return shopList;
 
-    const genre = options.genre;
-    const rating = options.rating;
+    const genre = options.value?.genre;
+    const rating = options.value?.rating || 0;
 
-    const filteredGenreShopList = shopList.filter(
-      (shop) => shop.genre === genre,
-    );
-    const filteredGenreAndRatingShopList = filteredGenreShopList.filter(
-      (shop) => transfoemRatingToNumber(shop.rating) >= rating,
-    );
+    const filteredGenreShopList = genre
+      ? shopList.filter((shop) => shop.genre === genre)
+      : shopList;
+    const filteredGenreAndRatingShopList = rating
+      ? filteredGenreShopList.filter(
+          (shop) => transfoemRatingToNumber(shop.rating) >= rating,
+        )
+      : filteredGenreShopList;
 
     const result: ShopList = [];
 
@@ -72,9 +82,34 @@ export async function useDatability<
     return result;
   }
 
-  async function refresh() {
-    await refreshData();
+  const formattedShopList = computed({
+    get: () => whichShopList(options),
+    set: () => whichShopList(options),
+  });
+
+  async function fetchData() {
+    status.value = 'loading';
+    try {
+      const { data: dataSpreadsheet } = await useSpreadsheet();
+      data.value = dataSpreadsheet.value;
+      status.value = 'success';
+    } catch (err) {
+      if (err instanceof Error) {
+        error.value = err;
+      } else {
+        error.value = new Error(String(err));
+      }
+      status.value = 'error';
+    }
   }
 
-  return { data: shopList, error, status, refresh };
+  watch(
+    options,
+    async () => {
+      formattedShopList.value = whichShopList(options);
+    },
+    { deep: true },
+  );
+
+  return { data: formattedShopList, error, status, fetch: fetchData };
 }

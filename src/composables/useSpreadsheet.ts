@@ -1,14 +1,9 @@
-﻿import type { Error, Status } from '~/types/http';
-import type { SheetValues } from '~/types/spreadsheet';
-import { property } from '~/utils/property';
-import { spreadsheet } from '~/utils/spreadsheet';
-
-const IS_DEV: boolean = import.meta.env.DEV;
+﻿const IS_DEV: boolean = import.meta.env.DEV;
 
 export async function useSpreadsheet() {
   const status = ref<Status>('idle');
   const data = ref<SheetValues | undefined>(undefined);
-  const error = ref<Error | undefined>(undefined);
+  const error = ref<Error>();
 
   const dataCache = computed({
     get: () => data.value,
@@ -124,8 +119,12 @@ export async function useSpreadsheet() {
         status.value = 'success';
 
         resolve();
-      } catch (error: any) {
-        error.value = error;
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          error.value = err;
+        } else {
+          error.value = new Error(String(err));
+        }
         status.value = 'error';
 
         reject(error);
