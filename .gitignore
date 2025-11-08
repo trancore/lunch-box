@@ -26,3 +26,4 @@ dist-ssr
 .clasp.json
 *storybook.log
 storybook-static
+.vite-ssg-temp

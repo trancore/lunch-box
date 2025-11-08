@@ -7,7 +7,11 @@
 export {}
 declare global {
   const EffectScope: typeof import('vue')['EffectScope']
+  const GENRE: typeof import('../consts/shop')['GENRE']
+  const GENRE_NAME_LIST: typeof import('../consts/shop')['GENRE_NAME_LIST']
   const IMAGE_URL: typeof import('../consts/image')['IMAGE_URL']
+  const RATING: typeof import('../consts/shop')['RATING']
+  const RATING_VALUE_LIST: typeof import('../consts/shop')['RATING_VALUE_LIST']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
   const computed: typeof import('vue')['computed']
   const createApp: typeof import('vue')['createApp']

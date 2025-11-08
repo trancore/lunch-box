@@ -8,7 +8,7 @@ export type ShopList = {
   /** 店舗名 */
   name: string;
   /** ジャンル */
-  genre: string;
+  genre: (typeof GENRE_NAME_LIST)[number];
   /** 予算 */
   budget: number;
   /** 開店時間 */

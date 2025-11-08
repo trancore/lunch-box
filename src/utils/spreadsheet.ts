@@ -5,7 +5,7 @@ export async function spreadsheet() {
   let getSpreadsheetDataRangeValues: (
     spreadsheetId: string,
     sheetId: number,
-  ) => Promise<any[][]>;
+  ) => Promise<any[][]> = async () => [[]];
 
   if (IS_PROD && !IS_SSR) {
     const { GASClient } = await import('gas-client');
