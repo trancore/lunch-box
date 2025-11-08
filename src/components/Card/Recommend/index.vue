@@ -62,7 +62,12 @@ onMounted(async () => await fetch());
       </div>
     </template>
     <template #content>
-      <div v-if="recommendShopListStatus === 'success'" class="content fadeup">
+      <div
+        v-if="
+          recommendShopListStatus === 'success' && recommendShopList.length > 0
+        "
+        class="content fadeup"
+      >
         <CardShop
           v-for="shop in recommendShopList"
           :id="String(shop.id)"
@@ -73,6 +78,15 @@ onMounted(async () => await fetch());
           :businessHours="getBusinessHours(shop.openAt, shop.closeAt)"
           :rating="transfoemRatingToNumber(shop.rating)"
         />
+      </div>
+      <div
+        v-else-if="
+          recommendShopListStatus === 'success' &&
+          recommendShopList.length === 0
+        "
+        class="content fadeup"
+      >
+        <p>店舗がありませんでした</p>
       </div>
       <div v-else class="content fadeup">
         <SkeltonShop v-for="shop in Array(4)" />
@@ -122,6 +136,11 @@ onMounted(async () => await fetch());
     flex-direction: column;
     flex-wrap: nowrap;
     gap: 16px;
+    height: 100%;
+  }
+
+  & > p {
+    margin: 0;
   }
 }
 </style>
