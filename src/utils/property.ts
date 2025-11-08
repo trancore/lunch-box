@@ -2,7 +2,7 @@
 const IS_SSR: boolean = import.meta.env.SSR;
 
 export async function property() {
-  let getPropertyValues: (key: string[]) => Promise<string[]>;
+  let getPropertyValues: (key: string[]) => Promise<string[]> = async () => [];
 
   if (IS_PROD && !IS_SSR) {
     // クライアントサイドでのみgas-clientを動的インポート

@@ -1,34 +1,40 @@
 ﻿<script setup lang="ts">
-const genreList = [
-  { genre: '選択してください' },
-  { genre: 'イタリアン' },
-  { genre: 'フレンチ' },
-  { genre: '和食' },
-  { genre: '中華' },
-  { genre: 'カフェ' },
-];
-const ratingList = [
-  { rating: '3以上' },
-  { rating: '4以上' },
-  { rating: '5以上' },
-];
-
-const recommendShopList = ref<ShopList>([]);
-const recommendShopListStatus = ref<Status>('idle');
-const selectedGenre = ref('イタリアン');
-const selectedRating = ref(3);
+const genreList = Object.entries(GENRE).map((genre) => {
+  return { id: genre[1].ID, name: genre[1].NAME };
+});
+const ratingList = Object.entries(RATING).map((rating) => {
+  return { id: rating[1].ID, name: rating[1].NAME, value: rating[1].VALUE };
+});
 
 const { getBusinessHours } = format();
 const { transfoemRatingToNumber } = transform();
 
-onMounted(async () => {
-  const { data, status } = await useDatability('recommend', {
-    genre: selectedGenre.value,
-    rating: selectedRating.value,
-  });
-  recommendShopList.value = data.value;
-  recommendShopListStatus.value = status.value;
+const selectedGenre = ref<(typeof genreList)[number]>();
+const selectedRating = ref<(typeof ratingList)[number]>();
+const recommentShopOptions = ref({
+  genre: selectedGenre.value?.name,
+  rating: selectedRating.value?.value,
 });
+
+const {
+  data: recommendShopList,
+  status: recommendShopListStatus,
+  fetch,
+} = useDatability('recommend', recommentShopOptions);
+
+watch(
+  [selectedGenre, selectedRating],
+  async ([newGenre, newRating], [oldGenre, oldRating]) => {
+    if (newGenre !== oldGenre || newRating !== oldRating) {
+      recommentShopOptions.value = {
+        genre: newGenre?.name,
+        rating: newRating?.value,
+      };
+    }
+  },
+);
+
+onMounted(async () => await fetch());
 </script>
 
 <template>
@@ -42,13 +48,13 @@ onMounted(async () => {
         <div class="form-area">
           <Select
             v-model="selectedGenre"
-            optionLabel="genre"
+            optionLabel="name"
             placeholder="ジャンル"
             :options="genreList"
           />
           <Select
             v-model="selectedRating"
-            optionLabel="rating"
+            optionLabel="name"
             placeholder="評価"
             :options="ratingList"
           />
@@ -56,7 +62,12 @@ onMounted(async () => {
       </div>
     </template>
     <template #content>
-      <div v-if="recommendShopListStatus === 'success'" class="content fadeup">
+      <div
+        v-if="
+          recommendShopListStatus === 'success' && recommendShopList.length > 0
+        "
+        class="content fadeup"
+      >
         <CardShop
           v-for="shop in recommendShopList"
           :id="String(shop.id)"
@@ -67,6 +78,15 @@ onMounted(async () => {
           :businessHours="getBusinessHours(shop.openAt, shop.closeAt)"
           :rating="transfoemRatingToNumber(shop.rating)"
         />
+      </div>
+      <div
+        v-else-if="
+          recommendShopListStatus === 'success' &&
+          recommendShopList.length === 0
+        "
+        class="content fadeup"
+      >
+        <p>店舗がありませんでした</p>
       </div>
       <div v-else class="content fadeup">
         <SkeltonShop v-for="shop in Array(4)" />
@@ -116,6 +136,11 @@ onMounted(async () => {
     flex-direction: column;
     flex-wrap: nowrap;
     gap: 16px;
+    height: 100%;
+  }
+
+  & > p {
+    margin: 0;
   }
 }
 </style>
