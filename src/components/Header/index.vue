@@ -20,7 +20,7 @@ const text1 = ref('');
     </InputGroup>
     <nav v-if="isPC" class="nav">
       <RouterLink to="/">トップ</RouterLink>
-      <RouterLink to="search">お店を探す</RouterLink>
+      <RouterLink to="/search">お店を探す</RouterLink>
     </nav>
   </header>
 </template>
