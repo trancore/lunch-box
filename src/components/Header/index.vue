@@ -1,9 +1,13 @@
 ﻿<script setup lang="ts">
 import lunchBoxIcon from '~/assets/images/lunch-box_icon.svg';
 
-const { isPC } = useMediaQuery();
+const router = useRouter();
+const route = useRoute();
 
-const text1 = ref('');
+const keyword = ref('');
+function search(_event: PointerEvent) {
+  router.push({ path: '/search', query: { keyword: keyword.value } });
+}
 </script>
 
 <template>
@@ -13,12 +17,19 @@ const text1 = ref('');
       <h1 class="app-name">lunch-box</h1>
     </div>
     <InputGroup class="search-input">
-      <InputText v-model="text1" placeholder="店舗名、ジャンルで検索" />
+      <InputText v-model="keyword" placeholder="店舗名、ジャンルで検索" />
       <InputGroupAddon>
-        <Icon name="SEARCH" type="primary" />
+        <Button
+          severity="contrast"
+          variant="text"
+          aria-label="search"
+          @click="search"
+        >
+          <Icon name="SEARCH" type="primary" />
+        </Button>
       </InputGroupAddon>
     </InputGroup>
-    <nav v-if="isPC" class="nav">
+    <nav class="nav">
       <RouterLink to="/">トップ</RouterLink>
       <RouterLink to="/search">お店を探す</RouterLink>
     </nav>
