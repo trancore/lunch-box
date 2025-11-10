@@ -1,11 +1,9 @@
 ﻿<script setup lang="ts">
-import { ref } from 'vue';
-import { RouterLink } from 'vue-router';
-
 import lunchBoxIcon from '~/assets/images/lunch-box_icon.svg';
 
+const { isPC } = useMediaQuery();
+
 const text1 = ref('');
-const isSP = ref(true);
 </script>
 
 <template>
@@ -20,7 +18,7 @@ const isSP = ref(true);
         <Icon name="SEARCH" type="primary" />
       </InputGroupAddon>
     </InputGroup>
-    <nav v-if="!isSP" class="nav">
+    <nav v-if="isPC" class="nav">
       <RouterLink to="/">トップ</RouterLink>
       <RouterLink to="search">お店を探す</RouterLink>
     </nav>

@@ -82,6 +82,7 @@ declare global {
   const useDatability: typeof import('../composables/useDatability')['useDatability']
   const useId: typeof import('vue')['useId']
   const useLink: typeof import('vue-router')['useLink']
+  const useMediaQuery: typeof import('../composables/useMediaQuery')['useMediaQuery']
   const useModel: typeof import('vue')['useModel']
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
