@@ -1,11 +1,24 @@
 ﻿<script setup lang="ts">
 import lunchBoxIcon from '~/assets/images/lunch-box_icon.svg';
 
-const router = useRouter();
+// クエリからkeywordを取得し、入力フォームに設定する
 const route = useRoute();
+const keyword = ref(route.query.keyword?.toString() || '');
+watch(
+  () => route.query,
+  () => {
+    const keywordQuery = route.query.keyword?.toString() || '';
+    keyword.value = keywordQuery;
+  },
+);
 
-const keyword = ref('');
-function search(_event: PointerEvent) {
+const router = useRouter();
+
+function search(event?: PointerEvent | KeyboardEvent) {
+  if (event instanceof KeyboardEvent && event.key !== 'Enter') {
+    return;
+  }
+
   router.push({ path: '/search', query: { keyword: keyword.value } });
 }
 </script>
@@ -17,7 +30,12 @@ function search(_event: PointerEvent) {
       <h1 class="app-name">lunch-box</h1>
     </div>
     <InputGroup class="search-input">
-      <InputText v-model="keyword" placeholder="店舗名、ジャンルで検索" />
+      <InputText
+        v-model="keyword"
+        placeholder="店舗名、ジャンルで検索"
+        enterkeyhint="search"
+        @keyup="search"
+      />
       <InputGroupAddon>
         <Button
           severity="contrast"
