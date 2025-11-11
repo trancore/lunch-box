@@ -1,11 +1,26 @@
 ﻿<script setup lang="ts">
-import { ref } from 'vue';
-import { RouterLink } from 'vue-router';
-
 import lunchBoxIcon from '~/assets/images/lunch-box_icon.svg';
 
-const text1 = ref('');
-const isSP = ref(true);
+// クエリからkeywordを取得し、入力フォームに設定する
+const route = useRoute();
+const keyword = ref(route.query.keyword?.toString() || '');
+watch(
+  () => route.query,
+  () => {
+    const keywordQuery = route.query.keyword?.toString() || '';
+    keyword.value = keywordQuery;
+  },
+);
+
+const router = useRouter();
+
+function search(event?: PointerEvent | KeyboardEvent) {
+  if (event instanceof KeyboardEvent && event.key !== 'Enter') {
+    return;
+  }
+
+  router.push({ path: '/search', query: { keyword: keyword.value } });
+}
 </script>
 
 <template>
@@ -15,14 +30,26 @@ const isSP = ref(true);
       <h1 class="app-name">lunch-box</h1>
     </div>
     <InputGroup class="search-input">
-      <InputText v-model="text1" placeholder="店舗名、ジャンルで検索" />
+      <InputText
+        v-model="keyword"
+        placeholder="店舗名、ジャンルで検索"
+        enterkeyhint="search"
+        @keyup="search"
+      />
       <InputGroupAddon>
-        <Icon name="SEARCH" type="primary" />
+        <Button
+          severity="contrast"
+          variant="text"
+          aria-label="search"
+          @click="search"
+        >
+          <Icon name="SEARCH" type="primary" />
+        </Button>
       </InputGroupAddon>
     </InputGroup>
-    <nav v-if="!isSP" class="nav">
+    <nav class="nav">
       <RouterLink to="/">トップ</RouterLink>
-      <RouterLink to="search">お店を探す</RouterLink>
+      <RouterLink to="/search">お店を探す</RouterLink>
     </nav>
   </header>
 </template>
