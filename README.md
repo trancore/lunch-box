@@ -53,6 +53,14 @@ erDiagram
 
 ![詳細画面イメージ](/docs/images/detail-page-design.png)
 
+## 画面一覧
+
+| No | 画面名 | パス | クエリ | meta title |
+| :-: | --- | --- | --- | --- |
+| 1 | トップ | `/` | - | トップ \| lunch-box |
+| 2 | 検索 | `/search` | `keyword`：キーワード検索 | 検索 \| lunch-box |
+| 3 | 店舗詳細 | `/shops/:id` | - | {店舗名} \| lunch-box |
+
 ## 🌳環境変数
 
 スクリプトIDは、.clasp.jsonに指定する必要があります。  
