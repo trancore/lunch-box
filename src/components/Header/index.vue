@@ -13,12 +13,10 @@ watch(
 );
 
 const router = useRouter();
-
-function search(event?: PointerEvent | KeyboardEvent) {
+function search(event: PointerEvent | KeyboardEvent) {
   if (event instanceof KeyboardEvent && event.key !== 'Enter') {
     return;
   }
-
   router.push({ path: '/search', query: { keyword: keyword.value } });
 }
 </script>
