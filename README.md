@@ -53,12 +53,16 @@ erDiagram
 
 ![詳細画面イメージ](/docs/images/detail-page-design.png)
 
+→  
+スプレッドシートから通信を行うとき、データを一括して全て取得している（トップ画面、検索画面）。  
+これより、通信量を減らすため、詳細画面よりモーダルを作りデータを使いまわした方が良い。
+
 ## 画面一覧
 
 | No | 画面名 | パス | クエリ | meta title |
 | :-: | --- | --- | --- | --- |
 | 1 | トップ | `/` | - | トップ \| lunch-box |
-| 2 | 検索 | `/search` | `keyword`：キーワード検索 | 検索 \| lunch-box |
+| 2 | 検索 | `/search` | `keyword`：キーワード検索<br>`sort`：並び順<br>`genre`：ジャンル<br>`price`：価格帯<br>`rating`：評価 | 検索 \| lunch-box |
 | 3 | 店舗詳細 | `/shops/:id` | - | {店舗名} \| lunch-box |
 
 ## 🌳環境変数
