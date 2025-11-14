@@ -13,13 +13,11 @@ watch(
 );
 
 const router = useRouter();
-
-function search(event?: PointerEvent | KeyboardEvent) {
+function search(event: PointerEvent | KeyboardEvent) {
   if (event instanceof KeyboardEvent && event.key !== 'Enter') {
     return;
   }
-
-  router.push({ path: '/search', query: { keyword: keyword.value } });
+  router.push({ path: '/', query: { keyword: keyword.value } });
 }
 </script>
 
@@ -47,18 +45,17 @@ function search(event?: PointerEvent | KeyboardEvent) {
         </Button>
       </InputGroupAddon>
     </InputGroup>
-    <nav class="nav">
-      <RouterLink to="/">トップ</RouterLink>
-      <RouterLink to="/search">お店を探す</RouterLink>
-    </nav>
   </header>
 </template>
 
 <style lang="scss" scoped>
 .header {
+  z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: sticky;
+  top: 0;
   gap: 40px;
   padding: 16px 0;
   background-color: var(--p-primary-color);
