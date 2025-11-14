@@ -184,7 +184,6 @@ watch(selectedRating, (rating) => {
   }
 
   & > .side-menu {
-    z-index: 9998;
     position: sticky;
     top: 100px;
     padding: 16px;
