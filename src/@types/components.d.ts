@@ -32,7 +32,6 @@ declare module 'vue' {
     MenuResult: typeof import('./../components/Menu/Result/index.vue')['default']
     MenuSide: typeof import('./../components/Menu/Side/index.vue')['default']
     PageDetail: typeof import('./../components/Page/Detail/index.vue')['default']
-    PageSearch: typeof import('./../components/Page/Search/index.vue')['default']
     PageTop: typeof import('./../components/Page/Top/index.vue')['default']
     PanelMenu: typeof import('primevue/panelmenu')['default']
     Rating: typeof import('primevue/rating')['default']

@@ -8,8 +8,15 @@ const imageUrlSplash = IMAGE_URL.SPLASH;
       <ImageSplash alt="splash" :src="imageUrlSplash" />
       <p class="catch-text">今日のランチは何にする？</p>
     </div>
-    <div class="content">
+    <div class="recommend">
       <CardRecommend />
+    </div>
+    <div class="search-area">
+      <div class="content">
+        <MenuSide>
+          <MenuResult />
+        </MenuSide>
+      </div>
     </div>
   </div>
 </template>
@@ -36,10 +43,18 @@ const imageUrlSplash = IMAGE_URL.SPLASH;
     }
   }
 
-  > .content {
+  & > .recommend {
     margin: 0 auto;
     padding: 44px 0;
     max-width: $breakpoint-xl;
+  }
+
+  & > .search-area {
+    > .content {
+      margin: 0 auto;
+      padding: 44px 0;
+      max-width: $breakpoint-xl;
+    }
   }
 }
 </style>

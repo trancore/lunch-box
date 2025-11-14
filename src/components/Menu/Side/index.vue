@@ -184,8 +184,9 @@ watch(selectedRating, (rating) => {
   }
 
   & > .side-menu {
+    z-index: 9998;
     position: sticky;
-    top: 50px;
+    top: 100px;
     padding: 16px;
     min-width: 260px;
     border-radius: 15px;
@@ -193,6 +194,10 @@ watch(selectedRating, (rating) => {
 
     @media (prefers-color-scheme: dark) {
       background-color: black;
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      position: static;
     }
 
     & > .side-menu-content {

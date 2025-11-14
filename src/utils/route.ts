@@ -99,7 +99,7 @@ async function pushQuery(
 
   try {
     await router.push({
-      path: options.path ?? route.path ?? '/search',
+      path: options.path ?? route.path ?? '/',
       query,
     });
   } catch (error) {
