@@ -1,62 +1,77 @@
 ﻿<script setup lang="ts">
-type Props = {
-  // 店舗ID
-  id: string;
-  // 画像URL
-  imageUrl?: string;
-  // 店舗名
-  name: string;
-  // ランチ値段
-  price?: string;
-  // ジャンル
-  genre?: string;
-  // 営業時間
-  businessHours?: string;
-  // 評価
-  rating?: number;
-  // 経費計算可否
-  canExpenses?: boolean;
-};
+// 型解決できないため、明示的にimportする
+import type { ShopCard } from '~/types/shop';
 
-withDefaults(defineProps<Props>(), {
+type Props = ShopCard;
+
+const props = withDefaults(defineProps<Props>(), {
   canExpenses: false,
 });
+
+const { open } = usePrimeVue().useDialog();
+
+function openShopDialog() {
+  open(
+    defineAsyncComponent(() => import('~/components/Dialog/Shop/index.vue')),
+    {
+      props: {
+        header: props.name,
+        modal: true,
+        style: {
+          width: '90vw',
+          maxWidth: '800px',
+          height: '70vh',
+        },
+        dismissableMask: true,
+        blockScroll: true,
+      },
+      data: {
+        id: props.id,
+        imageUrl: props.imageUrl,
+        name: props.name,
+        price: props.price,
+        genre: props.genre,
+        businessHours: props.businessHours,
+        rating: props.rating,
+        canExpenses: props.canExpenses,
+      },
+    },
+  );
+}
 </script>
 
 <template>
-  <RouterLink class="hoverable" :to="`/shops/${id}`">
-    <Card class="shop-card">
-      <template #header>
-        <Icon
-          v-if="canExpenses"
-          class="can-expenses"
-          name="DOLLAR"
-          type="primary"
-          :size="2"
-        />
-        <Image
-          image-class="shop-image"
-          alt="shop"
-          :src="
-            imageUrl ??
-            // no-image
-            'https://drive.google.com/thumbnail?id=1nNC-25R33LyXVhS7DBcTbWnP58ylOccO'
-          "
-        />
-      </template>
-      <template #title>{{ name }}</template>
-      <template #subtitle>
-        <p class="subtitle">ランチ値段：~ {{ price ?? '??? ' }}円</p>
-      </template>
-      <template #content>
-        <p class="text-list">ジャンル：{{ genre ?? '???' }}</p>
-        <p class="text-list">営業時間：{{ businessHours ?? '???' }}</p>
-      </template>
-      <template #footer>
-        <Rating v-if="rating" :default-value="rating" readonly />
-      </template>
-    </Card>
-  </RouterLink>
+  <Card class="shop-card hoverable" @click="openShopDialog">
+    <template #header>
+      <Icon
+        v-if="canExpenses"
+        class="can-expenses"
+        name="DOLLAR"
+        type="primary"
+        :size="2"
+      />
+      <Image
+        image-class="shop-image"
+        alt="shop"
+        :src="
+          imageUrl ??
+          // no-image
+          'https://drive.google.com/thumbnail?id=1nNC-25R33LyXVhS7DBcTbWnP58ylOccO'
+        "
+      />
+    </template>
+    <template #title>{{ name }}</template>
+    <template #subtitle>
+      <p class="subtitle">ランチ値段：~ {{ price ?? '??? ' }}円</p>
+    </template>
+    <template #content>
+      <p class="text-list">ジャンル：{{ genre ?? '???' }}</p>
+      <p class="text-list">営業時間：{{ businessHours ?? '???' }}</p>
+    </template>
+    <template #footer>
+      <Rating v-if="rating" :default-value="rating" readonly />
+    </template>
+  </Card>
 </template>
 
 <style lang="scss" scoped>

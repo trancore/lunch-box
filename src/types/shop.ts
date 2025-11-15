@@ -24,3 +24,22 @@ export type ShopList = {
   /** 更新日 */
   updatedAt: Date;
 }[];
+
+export type ShopCard = {
+  // 店舗ID
+  id: string;
+  // 画像URL
+  imageUrl?: string;
+  // 店舗名
+  name: string;
+  // ランチ値段
+  price?: string;
+  // ジャンル
+  genre?: string;
+  // 営業時間
+  businessHours?: string;
+  // 評価
+  rating?: number;
+  // 経費計算可否
+  canExpenses?: boolean;
+};

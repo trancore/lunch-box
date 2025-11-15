@@ -1,6 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
+  <DynamicDialog />
   <Layout>
     <RouterView></RouterView>
   </Layout>

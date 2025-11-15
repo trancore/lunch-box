@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import { createPinia } from 'pinia';
 import 'primeicons/primeicons.css';
 import primeVue from 'primevue/config';
+import DialogService from 'primevue/dialogservice';
 import { ViteSSG } from 'vite-ssg';
 import { createMemoryHistory, createWebHashHistory } from 'vue-router';
 
@@ -98,6 +99,7 @@ export const createApp = ViteSSG(
         ripple: true,
       },
     });
+    app.use(DialogService);
 
     // windowsの参照エラーが出るためクライアントサイドでのみ実行
     if (!import.meta.env.SSR) {
