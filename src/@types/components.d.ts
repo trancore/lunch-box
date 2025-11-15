@@ -13,6 +13,8 @@ declare module 'vue' {
     CardRecommend: typeof import('./../components/Card/Recommend/index.vue')['default']
     CardShop: typeof import('./../components/Card/Shop/index.vue')['default']
     Checkbox: typeof import('primevue/checkbox')['default']
+    DialogShop: typeof import('./../components/Dialog/Shop/index.vue')['default']
+    DynamicDialog: typeof import('primevue/dynamicdialog')['default']
     Footer: typeof import('./../components/Footer/index.vue')['default']
     Header: typeof import('./../components/Header/index.vue')['default']
     Icon: typeof import('./../components/Icon/index.vue')['default']

@@ -50,7 +50,7 @@ function search(event: PointerEvent | KeyboardEvent) {
 
 <style lang="scss" scoped>
 .header {
-  z-index: 9999;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
