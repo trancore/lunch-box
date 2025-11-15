@@ -91,6 +91,7 @@ declare global {
   const useLink: typeof import('vue-router')['useLink']
   const useMediaQuery: typeof import('../composables/useMediaQuery')['useMediaQuery']
   const useModel: typeof import('vue')['useModel']
+  const usePrimeVue: typeof import('../composables/usePrimeVue')['usePrimeVue']
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
   const useSlots: typeof import('vue')['useSlots']
@@ -110,7 +111,7 @@ declare global {
   export type { Status, Error } from '../types/http'
   import('../types/http')
   // @ts-ignore
-  export type { Rating, ShopList } from '../types/shop'
+  export type { Rating, ShopList, ShopCard } from '../types/shop'
   import('../types/shop')
   // @ts-ignore
   export type { SheetValues } from '../types/spreadsheet'
