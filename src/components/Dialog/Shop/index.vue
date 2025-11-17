@@ -70,13 +70,16 @@ onMounted(() => {
         />
       </div>
     </div>
-    <Button label="閉じる" @click="closeDialog" />
+    <div class="footer">
+      <Button class="close" label="閉じる" @click="closeDialog" />
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .dialog-shop {
-  padding: 0 1rem;
+  padding: 16px;
+  background-color: gainsboro;
 
   & > .content {
     margin: 0 auto 24px;
@@ -93,6 +96,7 @@ onMounted(() => {
       & > .information {
         flex: 2;
         border-radius: 15px;
+        padding: 0 12px 4px;
         background-color: white;
 
         @media (prefers-color-scheme: dark) {
@@ -122,6 +126,7 @@ onMounted(() => {
       & > .menu {
         flex: 3;
         border-radius: 15px;
+        padding: 0 12px 4px;
         background-color: white;
 
         @media (prefers-color-scheme: dark) {
@@ -157,6 +162,7 @@ onMounted(() => {
     & > .map {
       margin-top: 24px;
       border-radius: 15px;
+      padding: 0 12px 24px;
       background-color: white;
 
       @media (prefers-color-scheme: dark) {
@@ -173,6 +179,10 @@ onMounted(() => {
         padding: 0 24px;
       }
     }
+  }
+
+  & > .footer {
+    text-align: right;
   }
 }
 </style>
