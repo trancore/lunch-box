@@ -7,6 +7,12 @@ export type ShopList = {
   url: string;
   /** 店舗名 */
   name: string;
+  /** 住所 */
+  address: string;
+  /** 緯度 */
+  lat: number;
+  /** 経度 */
+  lng: number;
   /** ジャンル */
   genre: (typeof GENRE_NAME_LIST)[number];
   /** 予算 */
@@ -15,6 +21,8 @@ export type ShopList = {
   openAt: Date;
   /** 閉店時間 */
   closeAt: Date;
+  /** 定休日 */
+  regularHoliday: string;
   /** レーティング */
   rating: Rating;
   /** 紹介文 */
