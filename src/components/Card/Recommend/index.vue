@@ -124,7 +124,7 @@ onMounted(async () => await fetch());
 .content {
   display: flex;
   justify-content: space-around;
-  height: 400px;
+  min-height: 400px;
   padding: 16px;
   gap: 1rem;
 

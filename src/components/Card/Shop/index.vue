@@ -79,6 +79,7 @@ function openShopDialog() {
   display: flex;
   position: relative;
   outline: 1px solid var(--p-primary-color);
+  height: fit-content;
 
   @media (prefers-color-scheme: dark) {
     outline: 1px solid white;
