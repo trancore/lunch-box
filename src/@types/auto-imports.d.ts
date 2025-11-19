@@ -26,6 +26,7 @@ declare global {
   const defineComponent: typeof import('vue')['defineComponent']
   const defineStore: typeof import('pinia')['defineStore']
   const effectScope: typeof import('vue')['effectScope']
+  const filter: typeof import('../utils/filter')['filter']
   const format: typeof import('../utils/format')['format']
   const getActivePinia: typeof import('pinia')['getActivePinia']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
@@ -111,7 +112,7 @@ declare global {
   export type { Status, Error } from '../types/http'
   import('../types/http')
   // @ts-ignore
-  export type { Rating, ShopList, ShopCard } from '../types/shop'
+  export type { Rating, Shop, ShopList, ShopDialog } from '../types/shop'
   import('../types/shop')
   // @ts-ignore
   export type { SheetValues } from '../types/spreadsheet'
