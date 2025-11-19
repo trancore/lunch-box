@@ -1,4 +1,5 @@
 ﻿<script setup lang="ts">
+// auto-importが効かないため、明示的にimport
 import type { DynamicDialogInstance } from 'primevue/dynamicdialogoptions';
 
 const dialogRef = inject<{ value: DynamicDialogInstance }>('dialogRef');
@@ -7,7 +8,7 @@ function closeDialog(event: PointerEvent) {
   dialogRef?.value.close(event);
 }
 
-const shopData = ref<ShopCard | undefined>(undefined);
+const shopData = ref<ShopDialog | undefined>(undefined);
 
 onMounted(() => {
   shopData.value = dialogRef?.value.data;
@@ -34,27 +35,20 @@ onMounted(() => {
             </div>
             <div class="information-item">
               <Icon name="CALENDAR_TIMES" type="secondary" :size="1.2" />
-              <p>定休日：</p>
+              <p>定休日：{{ shopData?.regularHoliday }}</p>
             </div>
             <div class="information-item">
               <Icon name="MAP_MARKER" type="secondary" :size="1.2" />
-              <p>住所：</p>
+              <p>住所：{{ shopData?.address }}</p>
             </div>
           </div>
         </div>
         <div class="menu">
           <div class="sub-title">
             <Icon name="CARET_RIGHT" type="primary" :size="1.5" />
-            <h3>メニュー</h3>
+            <h3>紹介文</h3>
           </div>
-          <p>実装中...</p>
-          <!-- TODO: 用件が決まったら実装する -->
-          <!-- <div class="menu-items">
-            <div class="review">
-              <Rating :default-value="rating" readonly />
-            </div>
-            <div class="menu-items-cards"></div>
-          </div> -->
+          <p>{{ shopData?.introduction }}</p>
         </div>
       </div>
       <div class="map">
@@ -63,9 +57,10 @@ onMounted(() => {
           <h3>マップ</h3>
         </div>
         <Map
+          v-if="shopData?.lat && shopData?.lng"
           class="map-tile"
-          :lat="35.44604"
-          :lng="139.64266"
+          :lat="shopData?.lat"
+          :lng="shopData?.lng"
           tooltipText="店舗名"
         />
       </div>
