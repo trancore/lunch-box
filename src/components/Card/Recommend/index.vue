@@ -1,4 +1,10 @@
 ﻿<script setup lang="ts">
+type Props = {
+  shopList: ShopList;
+  status: Status;
+};
+const props = defineProps<Props>();
+
 const genreList = Object.entries(GENRE).map((genre) => {
   return { id: genre[1].ID, name: genre[1].NAME };
 });
@@ -6,21 +12,38 @@ const ratingList = Object.entries(RATING).map((rating) => {
   return { id: rating[1].ID, name: rating[1].NAME, value: rating[1].VALUE };
 });
 
+const { filterRecommendShopList } = filter();
 const { getBusinessHours } = format();
 const { transfoemRatingToNumber } = transform();
-
 const selectedGenre = ref<(typeof genreList)[number]>();
 const selectedRating = ref<(typeof ratingList)[number]>();
 const recommentShopOptions = ref({
   genre: selectedGenre.value?.name,
   rating: selectedRating.value?.value,
 });
+const recommendShopList = computed(() => {
+  return filterRecommendShopList(props.shopList, recommentShopOptions.value);
+});
 
-const {
-  data: recommendShopList,
-  status: recommendShopListStatus,
-  fetch,
-} = useDatability('recommend', recommentShopOptions);
+function getShopCard(shop: Shop) {
+  return {
+    id: String(shop.id),
+    url: shop.url,
+    imageUrl:
+      'https://drive.google.com/thumbnail?id=1Z7DyO3snqH7QPwlyvB8-qzT_IRr-pLzE',
+    name: shop.name,
+    price: String(shop.budget),
+    genre: shop.genre,
+    businessHours: getBusinessHours(shop.openAt, shop.closeAt),
+    rating: transfoemRatingToNumber(shop.rating),
+    // canExpenses
+    regularHoliday: shop.regularHoliday,
+    address: shop.address,
+    introduction: shop.introduction,
+    lat: shop.lat,
+    lng: shop.lng,
+  };
+}
 
 watch(
   [selectedGenre, selectedRating],
@@ -33,8 +56,6 @@ watch(
     }
   },
 );
-
-onMounted(async () => await fetch());
 </script>
 
 <template>
@@ -63,27 +84,16 @@ onMounted(async () => await fetch());
     </template>
     <template #content>
       <div
-        v-if="
-          recommendShopListStatus === 'success' && recommendShopList.length > 0
-        "
+        v-if="status === 'success' && recommendShopList.length > 0"
         class="content fadeup"
       >
         <CardShop
           v-for="shop in recommendShopList"
-          :id="String(shop.id)"
-          :imageUrl="'https://drive.google.com/thumbnail?id=1Z7DyO3snqH7QPwlyvB8-qzT_IRr-pLzE'"
-          :name="shop.name"
-          :price="String(shop.budget)"
-          :genre="shop.genre"
-          :businessHours="getBusinessHours(shop.openAt, shop.closeAt)"
-          :rating="transfoemRatingToNumber(shop.rating)"
+          :shopCard="getShopCard(shop)"
         />
       </div>
       <div
-        v-else-if="
-          recommendShopListStatus === 'success' &&
-          recommendShopList.length === 0
-        "
+        v-else-if="status === 'success' && recommendShopList.length === 0"
         class="content fadeup"
       >
         <p>店舗がありませんでした</p>
