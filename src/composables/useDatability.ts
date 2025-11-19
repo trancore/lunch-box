@@ -1,18 +1,4 @@
-﻿type DataName = 'recommend' | 'search' | 'shops-detail';
-type RecommendOptions = {
-  genre: (typeof GENRE_NAME_LIST)[number] | undefined;
-  rating: (typeof RATING_VALUE_LIST)[number] | undefined;
-};
-type Options<S> = S extends 'recommend'
-  ? Ref<RecommendOptions>
-  : Ref<undefined>;
-
-export function useDatability<S extends DataName>(
-  name: S,
-  options: Options<S>,
-) {
-  const { transfoemRatingToNumber } = transform();
-
+﻿export function useDatability() {
   const status = ref<Status>('idle');
   const data = ref<SheetValues | undefined>(undefined);
   const error = ref<Error>();
@@ -40,58 +26,7 @@ export function useDatability<S extends DataName>(
     });
   });
 
-  function whichShopList(options: Options<S>) {
-    switch (name) {
-      case 'recommend':
-        return filterRecommendShopList(shopList.value, options);
-      case 'search':
-      case 'shops-detail':
-        return shopList.value;
-      default:
-        return [];
-    }
-  }
-
-  function filterRecommendShopList(shopList: ShopList, options: Options<S>) {
-    if (!options) return shopList;
-
-    const genre = options.value?.genre;
-    const rating = options.value?.rating || 0;
-
-    const filteredGenreShopList = genre
-      ? shopList.filter((shop) => shop.genre === genre)
-      : shopList;
-    const filteredGenreAndRatingShopList = rating
-      ? filteredGenreShopList.filter(
-          (shop) => transfoemRatingToNumber(shop.rating) >= rating,
-        )
-      : filteredGenreShopList;
-
-    const result: ShopList = [];
-
-    const limit =
-      filteredGenreAndRatingShopList.length < 4
-        ? filteredGenreAndRatingShopList.length
-        : 4;
-    while (result.length < limit) {
-      const randomIndex = Math.floor(
-        Math.random() * filteredGenreAndRatingShopList.length,
-      );
-      const randomShop = filteredGenreAndRatingShopList[randomIndex];
-      if (randomShop && !result.includes(randomShop)) {
-        result.push(randomShop);
-      }
-    }
-
-    return result;
-  }
-
-  const formattedShopList = computed({
-    get: () => whichShopList(options),
-    set: () => whichShopList(options),
-  });
-
-  async function fetchData() {
+  async function fetch() {
     status.value = 'loading';
     try {
       const { data: dataSpreadsheet } = await useSpreadsheet();
@@ -107,13 +42,5 @@ export function useDatability<S extends DataName>(
     }
   }
 
-  watch(
-    options,
-    async () => {
-      formattedShopList.value = whichShopList(options);
-    },
-    { deep: true },
-  );
-
-  return { data: formattedShopList, error, status, fetch: fetchData };
+  return { shopList, error, status, fetch };
 }
