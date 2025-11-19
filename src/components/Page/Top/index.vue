@@ -1,5 +1,9 @@
 ﻿<script setup lang="ts">
 const imageUrlSplash = IMAGE_URL.SPLASH;
+
+const { shopList, status, fetch } = useDatability();
+
+onMounted(async () => await fetch());
 </script>
 
 <template>
@@ -9,12 +13,12 @@ const imageUrlSplash = IMAGE_URL.SPLASH;
       <p class="catch-text">今日のランチは何にする？</p>
     </div>
     <div class="recommend">
-      <CardRecommend />
+      <CardRecommend :shopList="shopList" :status="status" />
     </div>
     <div class="search-area">
       <div class="content">
         <MenuSide>
-          <MenuResult />
+          <MenuResult :shopList="shopList" />
         </MenuSide>
       </div>
     </div>
