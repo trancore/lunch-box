@@ -1,21 +1,78 @@
 ﻿<script setup lang="ts">
-// 型解決できないため、明示的にimportする
-import type { ShopCard } from '~/types/shop';
+type Props = {
+  shopCard: {
+    /** 店舗ID */
+    id: string;
+    /** URL */
+    url: string;
+    /** 画像URL */
+    imageUrl?: string;
+    /** 店舗名 */
+    name: string;
+    /** ランチ値段 */
+    price?: string;
+    /** ジャンル */
+    genre: (typeof GENRE_NAME_LIST)[number];
+    /** 営業時間 */
+    businessHours?: string;
+    /** レーティング */
+    rating: number;
+    /** 経費計算可否 */
+    canExpenses?: boolean;
+    /** 定休日 */
+    regularHoliday: string;
+    /** 住所 */
+    address: string;
+    /** 紹介文 */
+    introduction: string;
+    /** 緯度 */
+    lat: number;
+    /** 経度 */
+    lng: number;
+  };
+};
 
-type Props = ShopCard;
+const { shopCard } = defineProps<Props>();
 
-const props = withDefaults(defineProps<Props>(), {
-  canExpenses: false,
-});
-
+const {
+  id,
+  url,
+  imageUrl,
+  name,
+  address,
+  lat,
+  lng,
+  price,
+  genre,
+  businessHours,
+  regularHoliday,
+  rating,
+  introduction,
+  canExpenses = false,
+} = shopCard;
 const { open } = usePrimeVue().useDialog();
-
+const dialogData = ref<ShopDialog>({
+  id,
+  url,
+  imageUrl,
+  name,
+  address,
+  lat,
+  lng,
+  price,
+  genre,
+  businessHours,
+  regularHoliday,
+  rating,
+  canExpenses,
+  introduction,
+});
 function openShopDialog() {
   open(
     defineAsyncComponent(() => import('~/components/Dialog/Shop/index.vue')),
     {
       props: {
-        header: props.name,
+        header: name,
         modal: true,
         style: {
           width: '90vw',
@@ -25,16 +82,7 @@ function openShopDialog() {
         dismissableMask: true,
         blockScroll: true,
       },
-      data: {
-        id: props.id,
-        imageUrl: props.imageUrl,
-        name: props.name,
-        price: props.price,
-        genre: props.genre,
-        businessHours: props.businessHours,
-        rating: props.rating,
-        canExpenses: props.canExpenses,
-      },
+      data: dialogData.value,
     },
   );
 }
