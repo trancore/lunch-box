@@ -1,4 +1,3 @@
-import Detail from '~/components/Page/Detail/index.vue';
 import Top from '~/components/Page/Top/index.vue';
 
 export const routes = [
@@ -6,11 +5,6 @@ export const routes = [
     path: '/',
     name: 'top',
     component: Top,
-  },
-  {
-    path: '/shops/:id',
-    name: 'detail',
-    component: Detail,
   },
 ];
 
