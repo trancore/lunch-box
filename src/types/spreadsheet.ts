@@ -5,6 +5,12 @@
   string,
   /** 店舗名 */
   string,
+  /** 住所 */
+  string,
+  /** 緯度 */
+  number,
+  /** 経度 */
+  number,
   /** ジャンル */
   string,
   /** 予算 */
@@ -13,6 +19,8 @@
   Date,
   /** 閉店時間 */
   Date,
+  /** 定休日 */
+  string,
   /** レビュー */
   number,
   /** 紹介文 */

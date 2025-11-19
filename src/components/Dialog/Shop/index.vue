@@ -1,20 +1,22 @@
 ﻿<script setup lang="ts">
-const imageUrlSplash = IMAGE_URL.SPLASH;
+// auto-importが効かないため、明示的にimport
+import type { DynamicDialogInstance } from 'primevue/dynamicdialogoptions';
 
-const shopName = ref('飲食店名');
+const dialogRef = inject<{ value: DynamicDialogInstance }>('dialogRef');
 
-const rating = ref(4.5);
+function closeDialog(event: PointerEvent) {
+  dialogRef?.value.close(event);
+}
+
+const shopData = ref<ShopDialog | undefined>(undefined);
+
+onMounted(() => {
+  shopData.value = dialogRef?.value.data;
+});
 </script>
 
 <template>
-  <div class="search-page">
-    <div class="splash-area">
-      <ImageSplash alt="splash" :src="imageUrlSplash" :height="200" />
-      <div class="title-box primary">
-        <p class="title">{{ shopName }}</p>
-        <Rating :default-value="rating" readonly />
-      </div>
-    </div>
+  <div class="dialog-shop">
     <div class="content">
       <div class="detail">
         <div class="information">
@@ -25,35 +27,28 @@ const rating = ref(4.5);
           <div class="information-items">
             <div class="information-item">
               <Icon name="SPARKLES" type="secondary" :size="1.2" />
-              <p>ジャンル：</p>
+              <p>ジャンル：{{ shopData?.genre }}</p>
             </div>
             <div class="information-item">
               <Icon name="CLOCK" type="secondary" :size="1.2" />
-              <p>営業時間：</p>
+              <p>営業時間：{{ shopData?.businessHours }}</p>
             </div>
             <div class="information-item">
               <Icon name="CALENDAR_TIMES" type="secondary" :size="1.2" />
-              <p>定休日：</p>
+              <p>定休日：{{ shopData?.regularHoliday }}</p>
             </div>
             <div class="information-item">
               <Icon name="MAP_MARKER" type="secondary" :size="1.2" />
-              <p>住所：</p>
+              <p>住所：{{ shopData?.address }}</p>
             </div>
           </div>
         </div>
         <div class="menu">
           <div class="sub-title">
             <Icon name="CARET_RIGHT" type="primary" :size="1.5" />
-            <h3>メニュー</h3>
+            <h3>紹介文</h3>
           </div>
-          <p>実装中...</p>
-          <!-- TODO: 用件が決まったら実装する -->
-          <!-- <div class="menu-items">
-            <div class="review">
-              <Rating :default-value="rating" readonly />
-            </div>
-            <div class="menu-items-cards"></div>
-          </div> -->
+          <p>{{ shopData?.introduction }}</p>
         </div>
       </div>
       <div class="map">
@@ -61,42 +56,28 @@ const rating = ref(4.5);
           <Icon name="CARET_RIGHT" type="primary" :size="1.5" />
           <h3>マップ</h3>
         </div>
-        <Map :lat="35.44604" :lng="139.64266" tooltipText="店舗名" />
+        <Map
+          v-if="shopData?.lat && shopData?.lng"
+          class="map-tile"
+          :lat="shopData?.lat"
+          :lng="shopData?.lng"
+          tooltipText="店舗名"
+        />
       </div>
+    </div>
+    <div class="footer">
+      <Button class="close" label="閉じる" @click="closeDialog" />
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.sub-title {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.search-page {
-  & > .splash-area {
-    position: relative;
-    text-align: center;
-
-    & > .title-box {
-      position: absolute;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-
-      & > .title {
-        font-size: 3rem;
-        font-weight: bold;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-        margin-bottom: 6px;
-      }
-    }
-  }
+.dialog-shop {
+  padding: 16px;
+  background-color: gainsboro;
 
   & > .content {
-    margin: 0 auto;
-    padding: 44px 0;
+    margin: 0 auto 24px;
     max-width: $breakpoint-xl;
 
     & > .detail {
@@ -108,10 +89,9 @@ const rating = ref(4.5);
       }
 
       & > .information {
-        flex: 1;
+        flex: 2;
         border-radius: 15px;
-        padding: 16px;
-
+        padding: 0 12px 4px;
         background-color: white;
 
         @media (prefers-color-scheme: dark) {
@@ -141,11 +121,21 @@ const rating = ref(4.5);
       & > .menu {
         flex: 3;
         border-radius: 15px;
-        padding: 16px;
+        padding: 0 12px 4px;
         background-color: white;
 
         @media (prefers-color-scheme: dark) {
           background-color: black;
+        }
+
+        & > .sub-title {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+        }
+
+        & > p {
+          margin: 0 24px;
         }
 
         & > .menu-items {
@@ -167,13 +157,27 @@ const rating = ref(4.5);
     & > .map {
       margin-top: 24px;
       border-radius: 15px;
-      padding: 16px;
+      padding: 0 12px 24px;
       background-color: white;
 
       @media (prefers-color-scheme: dark) {
         background-color: black;
       }
+
+      & > .sub-title {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      & > .map-tile {
+        padding: 0 24px;
+      }
     }
+  }
+
+  & > .footer {
+    text-align: right;
   }
 }
 </style>

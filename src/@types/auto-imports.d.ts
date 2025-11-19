@@ -26,6 +26,7 @@ declare global {
   const defineComponent: typeof import('vue')['defineComponent']
   const defineStore: typeof import('pinia')['defineStore']
   const effectScope: typeof import('vue')['effectScope']
+  const filter: typeof import('../utils/filter')['filter']
   const format: typeof import('../utils/format')['format']
   const getActivePinia: typeof import('pinia')['getActivePinia']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
@@ -91,6 +92,7 @@ declare global {
   const useLink: typeof import('vue-router')['useLink']
   const useMediaQuery: typeof import('../composables/useMediaQuery')['useMediaQuery']
   const useModel: typeof import('vue')['useModel']
+  const usePrimeVue: typeof import('../composables/usePrimeVue')['usePrimeVue']
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
   const useSlots: typeof import('vue')['useSlots']
@@ -110,7 +112,7 @@ declare global {
   export type { Status, Error } from '../types/http'
   import('../types/http')
   // @ts-ignore
-  export type { Rating, ShopList } from '../types/shop'
+  export type { Rating, Shop, ShopList, ShopDialog } from '../types/shop'
   import('../types/shop')
   // @ts-ignore
   export type { SheetValues } from '../types/spreadsheet'
