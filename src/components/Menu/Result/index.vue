@@ -1,4 +1,34 @@
-﻿<script setup lang="ts"></script>
+﻿<script setup lang="ts">
+type Props = {
+  shopList: ShopList;
+  // status: Status;
+};
+
+defineProps<Props>();
+
+const { getBusinessHours } = format();
+const { transfoemRatingToNumber } = transform();
+
+function getShopCard(shop: Shop) {
+  return {
+    id: String(shop.id),
+    url: shop.url,
+    imageUrl:
+      'https://drive.google.com/thumbnail?id=1Z7DyO3snqH7QPwlyvB8-qzT_IRr-pLzE',
+    name: shop.name,
+    price: String(shop.budget),
+    genre: shop.genre,
+    businessHours: getBusinessHours(shop.openAt, shop.closeAt),
+    rating: transfoemRatingToNumber(shop.rating),
+    // canExpenses
+    regularHoliday: shop.regularHoliday,
+    address: shop.address,
+    introduction: shop.introduction,
+    lat: shop.lat,
+    lng: shop.lng,
+  };
+}
+</script>
 
 <template>
   <div class="content">
@@ -7,16 +37,8 @@
       <p>お店を探す</p>
     </div>
     <div class="result">
-      <template v-for="(_value, index) in Array(10)">
-        <CardShop
-          :id="index.toString()"
-          :imageUrl="'https://drive.google.com/thumbnail?id=1Z7DyO3snqH7QPwlyvB8-qzT_IRr-pLzE'"
-          :name="'店舗名'"
-          :price="'1000'"
-          :genre="'イタリアン'"
-          :businessHours="'11:00 ~ 14:00'"
-          :rating="4"
-        />
+      <template v-for="(shop, index) in shopList">
+        <CardShop :shopCard="getShopCard(shop)" />
       </template>
     </div>
   </div>
