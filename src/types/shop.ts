@@ -1,6 +1,6 @@
 ﻿export type Rating = '☆☆☆☆☆' | '★☆☆☆☆' | '★★☆☆☆' | '★★★☆☆' | '★★★★☆' | '★★★★★';
 
-export type ShopList = {
+export type Shop = {
   /** 店舗ID */
   id: number;
   /** URL */
@@ -31,23 +31,23 @@ export type ShopList = {
   createdAt: Date;
   /** 更新日 */
   updatedAt: Date;
-}[];
+};
 
-export type ShopCard = {
-  // 店舗ID
+export type ShopList = Shop[];
+
+export type ShopDialog = {
   id: string;
-  // 画像URL
+  url: string;
   imageUrl?: string;
-  // 店舗名
   name: string;
-  // ランチ値段
+  address: string;
+  lat: number;
+  lng: number;
   price?: string;
-  // ジャンル
-  genre?: string;
-  // 営業時間
+  genre: (typeof GENRE_NAME_LIST)[number];
   businessHours?: string;
-  // 評価
-  rating?: number;
-  // 経費計算可否
+  regularHoliday: string;
+  rating: number;
   canExpenses?: boolean;
+  introduction: string;
 };
