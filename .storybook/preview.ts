@@ -3,6 +3,7 @@ import { type Preview, setup } from '@storybook/vue3-vite';
 import 'leaflet/dist/leaflet.css';
 import 'primeicons/primeicons.css';
 import primeVue from 'primevue/config';
+import DialogService from 'primevue/dialogservice';
 import { vueRouter } from 'storybook-vue3-router';
 import type { App } from 'vue';
 
@@ -19,6 +20,7 @@ setup((app: App) => {
       ripple: true,
     },
   });
+  app.use(DialogService);
 });
 
 const preview: Preview = {
