@@ -15,20 +15,18 @@ type Story = StoryObj<typeof meta>;
 
 export const Example: Story = {
   args: {
-    id: '1',
-    imageUrl: '/src/assets/images/dummy-lunch.png',
-    name: 'Shop Title',
-    price: '1,500',
-    genre: 'イタリアン',
-    businessHours: '11:00 - 22:00',
-    rating: 4,
-    canExpenses: true,
-  },
-};
-
-export const Undefined: Story = {
-  args: {
-    id: '2',
-    name: 'UndefinedShop',
+    shopCard: {
+      id: '1',
+      url: 'https://example.com/shop/1',
+      name: '店舗１',
+      address: '123 Example St, Example City',
+      lat: 35.6895,
+      lng: 139.6917,
+      genre: 'イタリアン',
+      regularHoliday: '毎週月曜日',
+      rating: 4,
+      introduction:
+        '美味しいイタリアン料理を提供する人気店です。雰囲気も良く、デートや友人との食事に最適です。',
+    },
   },
 };
