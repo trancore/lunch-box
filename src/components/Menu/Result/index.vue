@@ -81,7 +81,7 @@ function getShopCard(shop: Shop) {
 
   .result {
     display: grid;
-    grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+    grid-template: repeat(1, 1fr) / repeat(3, 1fr);
     place-items: center;
     gap: 16px;
 
