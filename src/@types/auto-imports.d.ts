@@ -113,6 +113,9 @@ declare global {
   export type { Status, Error } from '../types/http'
   import('../types/http')
   // @ts-ignore
+  export type { SearchFiltering } from '../types/search'
+  import('../types/search')
+  // @ts-ignore
   export type { Rating, Shop, ShopList, ShopDialog } from '../types/shop'
   import('../types/shop')
   // @ts-ignore

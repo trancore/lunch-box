@@ -18,7 +18,7 @@
 } as const;
 
 export const SORT_KEY_LIST = Object.entries(SORT).map((genre) => {
-  return genre[0];
+  return genre[0] as keyof typeof SORT;
 });
 
 export const PRICE_RANGE = [0, 5000] as const;

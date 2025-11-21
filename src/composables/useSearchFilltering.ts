@@ -33,7 +33,7 @@ export function useSearchFiltering() {
       items: genreList,
     },
   ]);
-  const selectedGenre = ref<string[]>([]);
+  const selectedGenre = ref<typeof GENRE_NAME_LIST>([]);
   const selectedGenreJoined = computed(() => {
     return selectedGenre.value.length > 0
       ? selectedGenre.value.map((genre) => genre).join(', ')
@@ -47,7 +47,7 @@ export function useSearchFiltering() {
     if (!value || checked === undefined) return;
 
     const nextGenre = await toggleGenre(value, checked);
-    selectedGenre.value = nextGenre;
+    selectedGenre.value = nextGenre as typeof GENRE_NAME_LIST;
   }
 
   const priceRange = ref<[number, number]>([...PRICE_RANGE]);
@@ -65,7 +65,7 @@ export function useSearchFiltering() {
         (item) => item.value === state.sort,
       );
       selectedSort.value = matchedSort ?? sortItems.value[0];
-      selectedGenre.value = state.genre;
+      selectedGenre.value = state.genre as typeof GENRE_NAME_LIST;
       priceRange.value = state.priceRange ?? [...PRICE_RANGE];
       selectedRating.value = state.rating ?? 0;
       nextTick(() => {

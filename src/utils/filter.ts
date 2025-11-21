@@ -52,17 +52,7 @@ export function filter() {
 
   function filterSearchResultShopList(
     shopList: ShopList,
-    searchFiltering: {
-      selectedSort?: {
-        id: 1 | 2 | 3 | 4;
-        name: 'おすすめ順' | '価格の安い順' | '価格の高い順' | '評価の高い順';
-        value: string;
-      };
-      selectedGenre: string[];
-      priceMin: number;
-      priceMax: number;
-      selectedRating: number;
-    },
+    searchFiltering: SearchFiltering,
   ) {
     let filteredShopList = shopList;
     const { selectedSort, selectedGenre, priceMin, priceMax, selectedRating } =
