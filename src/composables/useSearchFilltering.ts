@@ -1,15 +1,12 @@
 ﻿import type { SelectChangeEvent } from 'primevue/select';
 
+import { useSearchFilterStore } from '~/stores/searchFilter';
+
 export function useSearchFiltering() {
-  const route = useRoute();
-  const router = useRouter();
+  const { getState, setSort, toggleGenre, setPriceRange, setRating } =
+    useSearchFilterStore();
 
-  const { getState, setSort, toggleGenre, setPriceRange, setRating } = query(
-    route,
-    router,
-  );
-
-  const isSyncingFromRoute = ref(false);
+  const isSyncingFromStore = ref(false);
 
   const sortList = Object.entries(SORT).map((sort) => ({
     id: sort[1].ID,
@@ -57,10 +54,9 @@ export function useSearchFiltering() {
   const selectedRating = ref<number>(0);
 
   watch(
-    () => route.query,
-    () => {
-      isSyncingFromRoute.value = true;
-      const state = getState();
+    () => getState(),
+    (state) => {
+      isSyncingFromStore.value = true;
       const matchedSort = sortItems.value.find(
         (item) => item.value === state.sort,
       );
@@ -69,7 +65,7 @@ export function useSearchFiltering() {
       priceRange.value = state.priceRange ?? [...PRICE_RANGE];
       selectedRating.value = state.rating ?? 0;
       nextTick(() => {
-        isSyncingFromRoute.value = false;
+        isSyncingFromStore.value = false;
       });
     },
     { immediate: true, deep: true },
@@ -77,13 +73,13 @@ export function useSearchFiltering() {
   watch(
     priceRange,
     (range) => {
-      if (isSyncingFromRoute.value) return;
+      if (isSyncingFromStore.value) return;
       setPriceRange(range);
     },
     { deep: true },
   );
   watch(selectedRating, (rating) => {
-    if (isSyncingFromRoute.value) return;
+    if (isSyncingFromStore.value) return;
     setRating(rating);
   });
 
