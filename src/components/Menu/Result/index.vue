@@ -13,15 +13,19 @@ type SearchFiltering = {
 
 type Props = {
   shopList: ShopList;
+  status: Status;
   searchFiltering: SearchFiltering;
-  // status: Status;
 };
 
-defineProps<Props>();
+const props = defineProps<Props>();
+
+const { filterSearchResultShopList } = filter();
+const result = computed(() =>
+  filterSearchResultShopList(props.shopList, props.searchFiltering),
+);
 
 const { getBusinessHours } = format();
 const { transfoemRatingToNumber } = transform();
-
 function getShopCard(shop: Shop) {
   return {
     id: String(shop.id),
@@ -49,10 +53,17 @@ function getShopCard(shop: Shop) {
       <Icon name="CARET_RIGHT" type="primary" :size="1.5"></Icon>
       <p>お店を探す</p>
     </div>
-    <div class="result">
-      <template v-for="(shop, index) in shopList">
-        <CardShop :shopCard="getShopCard(shop)" />
-      </template>
+    <div v-if="status === 'success' && result.length > 0" class="result fadeup">
+      <CardShop v-for="(shop, index) in result" :shopCard="getShopCard(shop)" />
+    </div>
+    <div
+      v-else-if="status === 'success' && result.length === 0"
+      class="result fadeup"
+    >
+      <p>店舗がありませんでした</p>
+    </div>
+    <div v-else class="content fadeup">
+      <SkeltonShop v-for="shop in Array(9)" />
     </div>
   </div>
 </template>
