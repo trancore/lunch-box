@@ -95,6 +95,7 @@ declare global {
   const usePrimeVue: typeof import('../composables/usePrimeVue')['usePrimeVue']
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
+  const useSearchFiltering: typeof import('../composables/useSearchFilltering')['useSearchFiltering']
   const useSlots: typeof import('vue')['useSlots']
   const useSpreadsheet: typeof import('../composables/useSpreadsheet')['useSpreadsheet']
   const useTemplateRef: typeof import('vue')['useTemplateRef']
