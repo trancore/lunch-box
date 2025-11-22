@@ -16,6 +16,7 @@ const ICON_NAME = {
   CLOCK: 'pi  pi-clock',
   DOLLAR: 'pi pi-dollar',
   MAP_MARKER: 'pi pi-map-marker',
+  MONEY_BILL: 'pi pi-money-bill',
   SEARCH: 'pi pi-search',
   SHOPPING_BAG: 'pi pi-shopping-bag',
   SPARKLES: 'pi pi-sparkles',
