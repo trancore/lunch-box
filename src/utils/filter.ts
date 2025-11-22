@@ -50,5 +50,56 @@ export function filter() {
     return result;
   }
 
-  return { filterRecommendShopList };
+  function filterSearchResultShopList(
+    shopList: ShopList,
+    searchFiltering: SearchFiltering,
+  ) {
+    let filteredShopList = shopList;
+    const { selectedSort, selectedGenre, priceMin, priceMax, selectedRating } =
+      searchFiltering;
+
+    // ジャンルでフィルタリング
+    if (selectedGenre.length > 0) {
+      filteredShopList = filteredShopList.filter((shop) =>
+        selectedGenre.includes(shop.genre),
+      );
+    }
+
+    // 価格帯でフィルタリング
+    filteredShopList = filteredShopList.filter(
+      (shop) => shop.budget >= priceMin && shop.budget <= priceMax,
+    );
+
+    // 評価でフィルタリング
+    if (selectedRating > 0) {
+      filteredShopList = filteredShopList.filter(
+        (shop) => transfoemRatingToNumber(shop.rating) >= selectedRating,
+      );
+    }
+
+    // ソート
+    if (selectedSort) {
+      switch (selectedSort.name) {
+        case '価格の安い順':
+          filteredShopList.sort((a, b) => a.budget - b.budget);
+          break;
+        case '価格の高い順':
+          filteredShopList.sort((a, b) => b.budget - a.budget);
+          break;
+        case '評価の高い順':
+          filteredShopList.sort(
+            (a, b) =>
+              transfoemRatingToNumber(b.rating) -
+              transfoemRatingToNumber(a.rating),
+          );
+          break;
+        default:
+          break;
+      }
+    }
+
+    return filteredShopList;
+  }
+
+  return { filterRecommendShopList, filterSearchResultShopList };
 }

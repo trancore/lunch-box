@@ -15,12 +15,10 @@ declare global {
   const RATING_VALUE_LIST: typeof import('../consts/shop')['RATING_VALUE_LIST']
   const SORT: typeof import('../consts/search')['SORT']
   const SORT_KEY_LIST: typeof import('../consts/search')['SORT_KEY_LIST']
-  const SORT_NAME_LIST: typeof import('../consts/search')['SORT_NAME_LIST']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
   const computed: typeof import('vue')['computed']
   const createApp: typeof import('vue')['createApp']
   const createPinia: typeof import('pinia')['createPinia']
-  const createSearchQueryManager: typeof import('../utils/route')['createSearchQueryManager']
   const customRef: typeof import('vue')['customRef']
   const defineAsyncComponent: typeof import('vue')['defineAsyncComponent']
   const defineComponent: typeof import('vue')['defineComponent']
@@ -64,12 +62,10 @@ declare global {
   const onWatcherCleanup: typeof import('vue')['onWatcherCleanup']
   const property: typeof import('../utils/property')['property']
   const provide: typeof import('vue')['provide']
-  const query: typeof import('../utils/route')['query']
   const reactive: typeof import('vue')['reactive']
   const readonly: typeof import('vue')['readonly']
   const ref: typeof import('vue')['ref']
   const resolveComponent: typeof import('vue')['resolveComponent']
-  const route: typeof import('../utils/route')['route']
   const setActivePinia: typeof import('pinia')['setActivePinia']
   const setMapStoreSuffix: typeof import('pinia')['setMapStoreSuffix']
   const shallowReactive: typeof import('vue')['shallowReactive']
@@ -95,6 +91,7 @@ declare global {
   const usePrimeVue: typeof import('../composables/usePrimeVue')['usePrimeVue']
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
+  const useSearchFiltering: typeof import('../composables/useSearchFilltering')['useSearchFiltering']
   const useSlots: typeof import('vue')['useSlots']
   const useSpreadsheet: typeof import('../composables/useSpreadsheet')['useSpreadsheet']
   const useTemplateRef: typeof import('vue')['useTemplateRef']
@@ -111,6 +108,9 @@ declare global {
   // @ts-ignore
   export type { Status, Error } from '../types/http'
   import('../types/http')
+  // @ts-ignore
+  export type { SearchFiltering } from '../types/search'
+  import('../types/search')
   // @ts-ignore
   export type { Rating, Shop, ShopList, ShopDialog } from '../types/shop'
   import('../types/shop')
