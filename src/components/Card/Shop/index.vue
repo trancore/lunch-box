@@ -89,7 +89,7 @@ function openShopDialog() {
 </script>
 
 <template>
-  <Card class="shop-card hoverable" @click="openShopDialog">
+  <Card class="shop-card hoverable" :id="shopCard.id" @click="openShopDialog">
     <template #header>
       <Icon
         v-if="canExpenses"

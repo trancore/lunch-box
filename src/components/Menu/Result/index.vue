@@ -42,7 +42,12 @@ function getShopCard(shop: Shop) {
       <p>お店を探す</p>
     </div>
     <div v-if="status === 'success' && result.length > 0" class="result fadeup">
-      <CardShop v-for="(shop, index) in result" :shopCard="getShopCard(shop)" />
+      <CardShop
+        v-for="(shop, index) in result"
+        :key="shop.id"
+        :id="shop.id"
+        :shopCard="getShopCard(shop)"
+      />
     </div>
     <div
       v-else-if="status === 'success' && result.length === 0"
