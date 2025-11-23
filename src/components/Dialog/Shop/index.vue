@@ -145,7 +145,7 @@ onMounted(() => {
         }
 
         & > p {
-          margin: 0 24px;
+          margin: 0 24px 12px;
         }
 
         & > .menu-items {
