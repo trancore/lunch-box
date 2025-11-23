@@ -32,7 +32,7 @@ onMounted(() => {
               <p>
                 価格：{{
                   shopData?.price ? gerFormattedPrice(shopData.price) : '???'
-                }}円
+                }}
               </p>
             </div>
             <div class="information-item">

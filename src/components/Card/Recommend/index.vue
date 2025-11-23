@@ -32,7 +32,7 @@ function getShopCard(shop: Shop) {
     imageUrl:
       'https://drive.google.com/thumbnail?id=1Z7DyO3snqH7QPwlyvB8-qzT_IRr-pLzE',
     name: shop.name,
-    price: String(shop.budget),
+    price: shop.budget,
     genre: shop.genre,
     businessHours: getBusinessHours(shop.openAt, shop.closeAt),
     rating: transfoemRatingToNumber(shop.rating),
