@@ -15,9 +15,14 @@ import { globalIgnores } from 'eslint/config';
 export default defineConfigWithVueTs(
   {
     name: 'app/files-to-lint',
-    files: ['**/*.{ts,mts,tsx,vue}'],
+    files: ['**/*.{ts,tsx,vue}'],
   },
-  globalIgnores(['**/dist/**', '**/dist-ssr/**', '**/coverage/**']),
+  globalIgnores([
+    '**/dist/**',
+    '**/dist-ssr/**',
+    '**/coverage/**',
+    '**/*.stories/**',
+  ]),
   pluginStorybook.configs['flat/recommended'],
   pluginVue.configs['flat/essential'],
   vueTsConfigs.recommended,
