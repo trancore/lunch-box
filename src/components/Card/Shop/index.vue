@@ -108,7 +108,9 @@ function openShopDialog() {
         "
       />
     </template>
-    <template #title>{{ name }}</template>
+    <template #title>
+      <p class="title">{{ name }}</p>
+    </template>
     <template #subtitle>
       <p class="subtitle">ランチ値段：~ {{ price ?? '??? ' }}円</p>
     </template>
@@ -127,7 +129,6 @@ function openShopDialog() {
   display: flex;
   position: relative;
   outline: 1px solid var(--p-primary-color);
-  height: fit-content;
 
   @media (prefers-color-scheme: dark) {
     outline: 1px solid white;
@@ -146,6 +147,13 @@ function openShopDialog() {
     aspect-ratio: 4 / 3;
     border-radius: var(--p-card-border-radius) var(--p-card-border-radius) 0 0;
   }
+}
+
+.title {
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .subtitle {

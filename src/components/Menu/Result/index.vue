@@ -44,6 +44,7 @@ function getShopCard(shop: Shop) {
     <div v-if="status === 'success' && result.length > 0" class="result fadeup">
       <CardShop
         v-for="(shop, index) in result"
+        class="shop-card"
         :key="shop.id"
         :id="shop.id"
         :shopCard="getShopCard(shop)"
@@ -93,6 +94,14 @@ function getShopCard(shop: Shop) {
     @media (max-width: $breakpoint-sm) {
       grid-template: repeat(2, 1fr) / repeat(2, 1fr);
       gap: 8px;
+    }
+
+    & > .shop-card {
+      width: 232px;
+
+      @media (max-width: $breakpoint-sm) {
+        max-width: 194px;
+      }
     }
   }
 }
