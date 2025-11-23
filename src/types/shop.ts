@@ -43,7 +43,7 @@ export type ShopDialog = {
   address: string;
   lat: number;
   lng: number;
-  price?: string;
+  price?: number;
   genre: (typeof GENRE_NAME_LIST)[number];
   businessHours?: string;
   regularHoliday: string;

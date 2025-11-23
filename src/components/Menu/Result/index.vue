@@ -21,7 +21,7 @@ function getShopCard(shop: Shop) {
     imageUrl:
       'https://drive.google.com/thumbnail?id=1Z7DyO3snqH7QPwlyvB8-qzT_IRr-pLzE',
     name: shop.name,
-    price: String(shop.budget),
+    price: shop.budget,
     genre: shop.genre,
     businessHours: getBusinessHours(shop.openAt, shop.closeAt),
     rating: transfoemRatingToNumber(shop.rating),
@@ -42,7 +42,12 @@ function getShopCard(shop: Shop) {
       <p>お店を探す</p>
     </div>
     <div v-if="status === 'success' && result.length > 0" class="result fadeup">
-      <CardShop v-for="(shop, index) in result" :shopCard="getShopCard(shop)" />
+      <CardShop
+        v-for="(shop, index) in result"
+        :key="shop.id"
+        :id="shop.id"
+        :shopCard="getShopCard(shop)"
+      />
     </div>
     <div
       v-else-if="status === 'success' && result.length === 0"

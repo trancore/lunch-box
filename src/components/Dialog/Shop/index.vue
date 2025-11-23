@@ -2,6 +2,8 @@
 // auto-importが効かないため、明示的にimport
 import type { DynamicDialogInstance } from 'primevue/dynamicdialogoptions';
 
+const { gerFormattedPrice } = format();
+
 const dialogRef = inject<{ value: DynamicDialogInstance }>('dialogRef');
 
 function closeDialog(event: PointerEvent) {
@@ -25,6 +27,14 @@ onMounted(() => {
             <h3>基本情報</h3>
           </div>
           <div class="information-items">
+            <div class="information-item">
+              <Icon name="MONEY_BILL" type="secondary" :size="1.2" />
+              <p>
+                価格：{{
+                  shopData?.price ? gerFormattedPrice(shopData.price) : '???'
+                }}
+              </p>
+            </div>
             <div class="information-item">
               <Icon name="SPARKLES" type="secondary" :size="1.2" />
               <p>ジャンル：{{ shopData?.genre }}</p>

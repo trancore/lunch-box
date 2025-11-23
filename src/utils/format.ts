@@ -14,5 +14,19 @@
 
     return `${openHours}:${openMinutes} ~ ${closeHours}:${closeMinutes}`;
   }
-  return { getBusinessHours };
+
+  /**
+   * 価格を日本円の通貨形式で取得する
+   *
+   * @param price 価格
+   * @returns フォーマットされた価格 例；5000 -> ¥5,000
+   */
+  function gerFormattedPrice(price: number) {
+    return price.toLocaleString('ja-JP', {
+      style: 'currency',
+      currency: 'JPY',
+    });
+  }
+
+  return { getBusinessHours, gerFormattedPrice };
 }
