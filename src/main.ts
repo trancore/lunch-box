@@ -57,8 +57,7 @@ export const preset = definePreset(Aura, {
 });
 
 /**
- * Leafletのアイコン設定
- *
+ * Leafletのアイコン設定。\
  * Leafletのマーカーアイコンのパスが正しく設定されていない問題を修正している。
  *
  * @see https://vue2-leaflet.netlify.app/quickstart/#marker-icons-are-missing

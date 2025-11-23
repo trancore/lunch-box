@@ -19,6 +19,12 @@ export async function spreadsheet() {
       serverFunctions.getSpreadsheetDataRangeValues;
   }
 
+  /**
+   * スプレッドシートの指定シートのデータ範囲の値を取得する
+   * @param spreadsheetId
+   * @param sheetId
+   * @returns シートのデータ範囲の値
+   */
   async function getValues(spreadsheetId: string, sheetId: number) {
     return await getSpreadsheetDataRangeValues(spreadsheetId, sheetId);
   }

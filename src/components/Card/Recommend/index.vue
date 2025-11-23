@@ -89,6 +89,8 @@ watch(
       >
         <CardShop
           v-for="shop in recommendShopList"
+          class="shop-card"
+          :key="shop.id"
           :shopCard="getShopCard(shop)"
         />
       </div>
@@ -147,6 +149,14 @@ watch(
     flex-wrap: nowrap;
     gap: 16px;
     height: 100%;
+  }
+
+  & > .shop-card {
+    width: 232px;
+
+    @media (max-width: $breakpoint-sm) {
+      width: 340px;
+    }
   }
 
   & > p {

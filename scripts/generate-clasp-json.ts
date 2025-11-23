@@ -1,6 +1,10 @@
 ﻿import 'dotenv/config';
 import { writeFileSync } from 'node:fs';
 
+/**
+ * .clasp.jsonファイルを生成するスクリプト
+ */
+
 console.log('.envファイルから環境変数を読み込み、clasp.jsonに書き込みます。');
 
 const claspConfig = {

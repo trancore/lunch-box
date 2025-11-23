@@ -25,7 +25,10 @@ const config: StorybookConfig = {
           ...(config.css &&
             config.css.preprocessorOptions &&
             (config.css.preprocessorOptions as any).scss),
-          additionalData: "@use '~/assets/styles/variables' as *;",
+          additionalData: [
+            "@use '~/assets/styles/variables' as *;",
+            "@use '~/assets/styles/animations' as *;",
+          ],
         },
       },
     } as typeof config.css;

@@ -1,10 +1,10 @@
-import skipFormatting from '@vue/eslint-config-prettier/skip-formatting';
+import skipFormatting from '@vue/eslint-config-prettier';
 import {
   defineConfigWithVueTs,
   vueTsConfigs,
 } from '@vue/eslint-config-typescript';
-import pluginStorybook from 'eslint-plugin-storybook';
-import pluginVue from 'eslint-plugin-vue';
+import * as pluginStorybook from 'eslint-plugin-storybook';
+import * as pluginVue from 'eslint-plugin-vue';
 import { globalIgnores } from 'eslint/config';
 
 // To allow more languages other than `ts` in `.vue` files, uncomment the following lines:
@@ -15,10 +15,15 @@ import { globalIgnores } from 'eslint/config';
 export default defineConfigWithVueTs(
   {
     name: 'app/files-to-lint',
-    files: ['**/*.{ts,mts,tsx,vue}'],
+    files: ['**/*.{ts,tsx,vue}'],
   },
-  globalIgnores(['**/dist/**', '**/dist-ssr/**', '**/coverage/**']),
-  pluginStorybook.configs['flat/recommended'],
+  globalIgnores([
+    '**/dist/**',
+    '**/dist-ssr/**',
+    '**/coverage/**',
+    '**/*.stories/**',
+  ]),
+  pluginStorybook.default.configs['flat/recommended'],
   pluginVue.configs['flat/essential'],
   vueTsConfigs.recommended,
   skipFormatting,

@@ -50,6 +50,12 @@ export function filter() {
     return result;
   }
 
+  /**
+   * 検索結果のお店リストのフィルタリング処理
+   * @param shopList 店舗リスト
+   * @param searchFiltering 検索フィルタリング条件
+   * @returns フィルタリング後の店舗リスト
+   */
   function filterSearchResultShopList(
     shopList: ShopList,
     searchFiltering: SearchFiltering,

@@ -1,8 +1,17 @@
-﻿export function useDatability() {
+﻿/**
+ * Googleスプレッドシートから店舗データを取得・処理するためのコンポーザブル。
+ *
+ * @module useDatability
+ */
+export function useDatability() {
+  /** 通信状態 */
   const status = ref<Status>('idle');
+  /** 通信データ */
   const data = ref<SheetValues | undefined>(undefined);
+  /** エラー情報 */
   const error = ref<Error>();
 
+  /** 店舗リストを整形して返す */
   const shopList = computed<ShopList>(() => {
     const dataWithoutHeader = data.value?.slice(1) || [];
     return dataWithoutHeader.map((row) => {
@@ -26,6 +35,7 @@
     });
   });
 
+  /** スプレッドシートからデータを取得する */
   async function fetch() {
     status.value = 'loading';
     try {
@@ -42,5 +52,10 @@
     }
   }
 
-  return { shopList, error, status, fetch };
+  return {
+    shopList,
+    error,
+    status,
+    fetch,
+  };
 }

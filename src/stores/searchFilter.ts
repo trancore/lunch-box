@@ -12,6 +12,11 @@ export type SearchFilterState = {
 
 const DEFAULT_PRICE_RANGE: PriceRange = [...PRICE_RANGE];
 
+/**
+ * Search Filter Store
+ *
+ * @module searchFilterStore
+ */
 export const useSearchFilterStore = defineStore('searchFilter', () => {
   const genre = ref<string[]>([]);
   const sort = ref<string>();

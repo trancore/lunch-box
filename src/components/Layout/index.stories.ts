@@ -12,4 +12,10 @@ type Story = StoryObj<typeof meta>;
 
 export const Defaut: Story = {
   args: {},
+  render: (args) => ({
+    components: { Layout },
+    template:
+      '<Layout v-bind="args"><div style="height: 600px">content</div></Layout>',
+    setup: () => ({ args }),
+  }),
 };
