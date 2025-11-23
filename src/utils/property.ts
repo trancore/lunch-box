@@ -13,6 +13,11 @@ export async function property() {
     getPropertyValues = serverFunctions.getPropertyValues;
   }
 
+  /**
+   * 複数のプロパティ値を取得する
+   * @param keys 取得するプロパティキーの配列
+   * @returns プロパティキーとその値のオブジェクト
+   */
   async function getProperties<const K extends string[]>(
     keys: K,
   ): Promise<{ [P in K[number]]: string }> {

@@ -1,6 +1,10 @@
-﻿export function useMediaQuery() {
+﻿/**
+ * ウィンドウの幅に基づいてPCとSP（モバイル）のリアクティブなメディアクエリ状態を提供するVue 3のコンポーザブル。
+ *
+ * @module useMediaQuery
+ */
+export function useMediaQuery() {
   const width = ref<number>(window.innerWidth);
-
   const isPC = computed(() => width.value > 576);
   const isSP = computed(() => width.value <= 576);
 

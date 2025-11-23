@@ -2,6 +2,10 @@
 
 import { useSearchFilterStore } from '~/stores/searchFilter';
 
+/**
+ * 検索フィルタリング用のComposable
+ * @module useSearchFiltering
+ */
 export function useSearchFiltering() {
   const { getState, setSort, toggleGenre, setPriceRange, setRating } =
     useSearchFilterStore();

@@ -1,14 +1,34 @@
 ﻿/* eslint-disable @typescript-eslint/no-unused-vars */
 
+/**
+ * GAS Webアプリケーションエンドポイント
+ *
+ * @returns HTML
+ */
 function doGet() {
-  return HtmlService.createHtmlOutputFromFile('index');
+  return HtmlService.createHtmlOutputFromFile('index')
+    .setTitle('Lunch Box')
+    .addMetaTag('viewport', 'width=device-width, initial-scale=1');
 }
 
+/**
+ * スクリプトプロパティから複数の値を取得する
+ *
+ * @param {*} keys プロパティキーの配列
+ * @returns プロパティ値の配列
+ */
 function getPropertyValues(keys) {
   const props = PropertiesService.getScriptProperties();
   return keys.map((key) => props.getProperty(key) || '');
 }
 
+/**
+ * スプレッドシートのデータ範囲の値を取得する
+ *
+ * @param {*} spreadsheetId
+ * @param {*} sheetId
+ * @returns データ範囲の値の2次元配列
+ */
 function getSpreadsheetDataRangeValues(spreadsheetId, sheetId) {
   const spreadsheet = SpreadsheetApp.openById(spreadsheetId);
   const sheet = spreadsheet.getSheetById(sheetId);
@@ -25,6 +45,11 @@ function getSpreadsheetDataRangeValues(spreadsheetId, sheetId) {
 
 const GEMINI_API_KEY =
   PropertiesService.getScriptProperties().getProperty('GEMINI_API_KEY');
+/**
+ * AIに回答を取得する
+ * @param {*} prompt
+ * @returns AIの回答
+ */
 function getAiAnswer(prompt) {
   const payload = {
     contents: [
@@ -51,6 +76,11 @@ function getAiAnswer(prompt) {
   return content;
 }
 
+/**
+ * 文字列の時刻をスプレッドシートの時間シリアル値に変換する
+ * @param {*} stringTime "HH:MM"形式の時刻文字列
+ * @returns スプレッドシートの時間シリアル値
+ */
 function toTime(stringTime) {
   var parts = stringTime.split(':');
   var hours = Number(parts[0]);
