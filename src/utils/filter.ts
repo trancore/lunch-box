@@ -1,5 +1,5 @@
 ﻿type RecommendOptions = {
-  genre: (typeof GENRE_NAME_LIST)[number] | undefined;
+  genre: string | undefined;
   rating: (typeof RATING_VALUE_LIST)[number] | undefined;
 };
 

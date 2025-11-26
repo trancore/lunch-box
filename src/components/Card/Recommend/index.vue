@@ -1,13 +1,14 @@
 ﻿<script setup lang="ts">
+type Selected = {
+  id: number;
+  name: string;
+};
 type Props = {
   shopList: ShopList;
   status: Status;
 };
 const props = defineProps<Props>();
 
-const genreList = Object.entries(GENRE).map((genre) => {
-  return { id: genre[1].ID, name: genre[1].NAME };
-});
 const ratingList = Object.entries(RATING).map((rating) => {
   return { id: rating[1].ID, name: rating[1].NAME, value: rating[1].VALUE };
 });
@@ -15,7 +16,7 @@ const ratingList = Object.entries(RATING).map((rating) => {
 const { filterRecommendShopList } = filter();
 const { getBusinessHours } = format();
 const { transfoemRatingToNumber } = transform();
-const selectedGenre = ref<(typeof genreList)[number]>();
+const selectedGenre = ref<Selected>();
 const selectedRating = ref<(typeof ratingList)[number]>();
 const recommentShopOptions = ref({
   genre: selectedGenre.value?.name,
@@ -23,6 +24,15 @@ const recommentShopOptions = ref({
 });
 const recommendShopList = computed(() => {
   return filterRecommendShopList(props.shopList, recommentShopOptions.value);
+});
+const genreList = computed(() => {
+  const genreSet = new Set(
+    recommendShopList.value.map((shop: Shop) => shop.genre),
+  );
+  return Array.from(genreSet).map((genre, index) => ({
+    id: index + 1,
+    name: genre,
+  }));
 });
 
 function getShopCard(shop: Shop) {

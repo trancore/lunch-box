@@ -6,7 +6,7 @@
 
 export type SearchFiltering = {
   selectedSort?: (typeof genreList)[number];
-  selectedGenre: (typeof GENRE_NAME_LIST)[number][];
+  selectedGenre: string[];
   priceMin: number;
   priceMax: number;
   selectedRating: number;

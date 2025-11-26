@@ -14,7 +14,7 @@ export type Shop = {
   /** 経度 */
   lng: number;
   /** ジャンル */
-  genre: (typeof GENRE_NAME_LIST)[number];
+  genre: string;
   /** 予算 */
   budget: number;
   /** 開店時間 */
@@ -44,7 +44,7 @@ export type ShopDialog = {
   lat: number;
   lng: number;
   price?: number;
-  genre: (typeof GENRE_NAME_LIST)[number];
+  genre: string;
   businessHours?: string;
   regularHoliday: string;
   rating: number;

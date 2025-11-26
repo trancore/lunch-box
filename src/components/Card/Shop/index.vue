@@ -12,7 +12,7 @@ type Props = {
     /** ランチ値段 */
     price?: number;
     /** ジャンル */
-    genre: (typeof GENRE_NAME_LIST)[number];
+    genre: string;
     /** 営業時間 */
     businessHours?: string;
     /** レーティング */
