@@ -36,7 +36,13 @@ export default defineConfig({
     }),
     AutoImport({
       imports: ['vue', 'vue-router', 'pinia'],
-      dirs: ['src/composables', 'src/consts', 'src/utils', 'src/types'],
+      dirs: [
+        'src/composables',
+        'src/consts',
+        'src/utils',
+        'src/types',
+        'src/stores',
+      ],
       dts: 'src/@types/auto-imports.d.ts',
     }),
   ],

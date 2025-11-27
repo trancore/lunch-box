@@ -91,6 +91,7 @@ declare global {
   const usePrimeVue: typeof import('../composables/usePrimeVue')['usePrimeVue']
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
+  const useSearchFilterStore: typeof import('../stores/searchFilter')['useSearchFilterStore']
   const useSearchFiltering: typeof import('../composables/useSearchFilltering')['useSearchFiltering']
   const useSlots: typeof import('vue')['useSlots']
   const useSpreadsheet: typeof import('../composables/useSpreadsheet')['useSpreadsheet']
@@ -117,4 +118,7 @@ declare global {
   // @ts-ignore
   export type { SheetValues } from '../types/spreadsheet'
   import('../types/spreadsheet')
+  // @ts-ignore
+  export type { SearchFilterState } from '../stores/searchFilter'
+  import('../stores/searchFilter')
 }

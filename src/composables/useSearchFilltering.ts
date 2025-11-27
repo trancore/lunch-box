@@ -1,12 +1,10 @@
 ﻿import type { SelectChangeEvent } from 'primevue/select';
 
-import { useSearchFilterStore } from '~/stores/searchFilter';
-
 /**
  * 検索フィルタリング用のComposable
  * @module useSearchFiltering
  */
-export function useSearchFiltering() {
+export function useSearchFiltering(shopList: Ref<ShopList>) {
   const { getState, setSort, toggleGenre, setPriceRange, setRating } =
     useSearchFilterStore();
 
@@ -24,17 +22,21 @@ export function useSearchFiltering() {
     setSort(value);
   }
 
-  const genreList = Object.entries(GENRE).map((genre) => {
-    return { id: genre[1].ID, name: genre[1].NAME };
+  const genreList = computed(() => {
+    const genreSet = new Set(shopList.value.map((shop: Shop) => shop.genre));
+    return Array.from(genreSet).map((genre, index) => ({
+      id: index + 1,
+      name: genre,
+    }));
   });
-  const genreItems = ref([
+  const genreItems = computed(() => [
     {
       label: 'ジャンル',
       icon: 'pi pi-file',
-      items: genreList,
+      items: genreList.value,
     },
   ]);
-  const selectedGenre = ref<typeof GENRE_NAME_LIST>([]);
+  const selectedGenre = ref<string[]>([]);
   const selectedGenreJoined = computed(() => {
     return selectedGenre.value.length > 0
       ? selectedGenre.value.map((genre) => genre).join(', ')

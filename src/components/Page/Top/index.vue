@@ -17,7 +17,7 @@ onMounted(async () => await fetch());
     </div>
     <div class="search-area">
       <div class="content">
-        <MenuSide v-slot="{ searchFiltering }">
+        <MenuSide v-slot="{ searchFiltering }" :shopList="shopList">
           <MenuResult
             :shopList="shopList"
             :status="status"

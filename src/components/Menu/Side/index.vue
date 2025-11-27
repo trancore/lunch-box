@@ -1,4 +1,13 @@
 ﻿<script setup lang="ts">
+import { toRef } from 'vue';
+
+type Props = {
+  shopList: ShopList;
+};
+
+const props = defineProps<Props>();
+const shopList = toRef(props, 'shopList');
+
 const {
   sortItems,
   selectedSort,
@@ -11,7 +20,7 @@ const {
   priceMin,
   priceMax,
   selectedRating,
-} = useSearchFiltering();
+} = useSearchFiltering(shopList);
 </script>
 
 <template>

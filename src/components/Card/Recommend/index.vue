@@ -26,9 +26,7 @@ const recommendShopList = computed(() => {
   return filterRecommendShopList(props.shopList, recommentShopOptions.value);
 });
 const genreList = computed(() => {
-  const genreSet = new Set(
-    recommendShopList.value.map((shop: Shop) => shop.genre),
-  );
+  const genreSet = new Set(props.shopList.map((shop: Shop) => shop.genre));
   return Array.from(genreSet).map((genre, index) => ({
     id: index + 1,
     name: genre,
