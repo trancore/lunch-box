@@ -11,7 +11,9 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: {},
+  args: {
+    shopList: [],
+  },
   render: (args) => ({
     components: { MenuSide },
     template: '<MenuSide v-bind="args">result</MenuSide>',
@@ -20,7 +22,9 @@ export const Default: Story = {
 };
 
 export const WithLongResult: Story = {
-  args: {},
+  args: {
+    shopList: [],
+  },
   render: (args) => ({
     components: { MenuSide },
     template:
