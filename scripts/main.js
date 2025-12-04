@@ -12,16 +12,6 @@ function doGet() {
 }
 
 /**
- * スプレッドシートを開いたときにカスタムメニューを追加
- */
-function onOpen() {
-  SpreadsheetApp.getUi()
-    .createMenu('カスタム関数')
-    .addItem('AI生成', 'fillEmptyCellsWithAiAnswer')
-    .addToUi();
-}
-
-/**
  * スクリプトプロパティから複数の値を取得する
  *
  * @param {*} keys プロパティキーの配列

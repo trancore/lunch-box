@@ -16,9 +16,9 @@
   /** 予算 */
   number,
   /** 開店時間 */
-  Date,
+  string,
   /** 閉店時間 */
-  Date,
+  string,
   /** 定休日 */
   string,
   /** レビュー */
